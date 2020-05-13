@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Configurazione programma</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+		<header id="header">
+				<div class="inner">
+					<a href="home.html" class="logo">Portale Gestione Processi</a>
+					<nav id="nav">
+						<a href="program-table.html">Gestione programmi</a>
+						<a href="process-table.html">Visualizza processi</a>
+						<a href="gestione-utente.html">Gestione utenti</a>
+						<a href="utente.html">Modifica profilo</a>
+						<a href="../index.html">Paolo.Pisetta, Disconnetti</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+		</header>
+
+		<!-- Main -->
+		<section id="main" class="wrapper">
+			<div class="inner">
+				<header class="align-center">
+					<h2>Configurazione programma</h2>
+				</header>
+				<div class="table-wrapper">
+					<table class="alt">
+						<thead>
+							<tr>
+								<th>ID programma</th>
+								<th>Descrizione</th>
+								<th>ID Programma prerequisito</th>
+								<th>Descrizione prerequisito</th>
+								<th>Tipologia</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input type="text" name="id_programma" value="">
+								</td>
+								<td>
+									<input type="text" name="configurazione_descrizioneprogramma" value="">
+								</td>
+								<td>
+									<div class="select-wrapper">
+										<select id="configurazione_idprerequisito">
+											<option>---</option>
+											<option value="a001" >a001</option>
+											<option value="a002">a002</option>
+											<option value="b003">b003</option>
+											<option value="b004">b004</option>
+											<option value="c005">c005</option>
+										</select> 
+									</div>
+								</td>
+								<td>
+									<input type="text" name="configurazione_prerequisito" value="">
+								</td>
+								<td>
+									<div class="select-wrapper">
+										<select id="configurazione_tipoprogramma">
+											<option>--------</option>
+											<option value="Periodico" >Periodico</option>
+											<option value="Richiesta">Su richiesta</option>
+										</select>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row 200%">
+						<div class="6u 12u$(medium)">
+                        
+						<br>
+							<h4>Seleziona calendario</h4>
+							<table class="alt">
+								<thead>
+									<tr>
+										<th>Giorno</th>
+										<th>Ora</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div class="select-wrapper">
+												<select id="configurazione_giorni">
+													<option value="giorno1">Lunedì</option>
+													<option value="giorno2">Martedì</option>
+													<option value="giorno3">Mercoledì</option>
+													<option value="giorno4">Giovedì</option>
+													<option value="giorno5">Venerdì</option>
+													<option value="giorno6">Sabato</option>
+													<option value="giorno7">Domenica</option>
+													<option value="giorno8">Tutti i giorni</option>
+													<option value="giorno9">Fine settimana</option>
+													<option value="giorno10">Fine mese</option>
+												</select> 
+											</div>
+										</td>
+										<td>
+											<div class="6u$ 12u$(small)">
+												<input type="time" name="ora">
+											</div>
+										</td>
+										<td>
+											<a href="#" class="button special fit">Aggiungi</a>
+										</td>	
+									</tr>
+								</tbody>
+							</table>
+
+							<br><br>
+                            <h4>Seleziona utenti</h4>
+							<table class="alt">
+								<thead>
+									<tr>
+										<th colspan="2">Utente con autorizzazione di avvio</th>
+                                        <th colspan="2">Utente che riceverà notifiche</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div class="select-wrapper">
+												<select id="configurazione_idutente">
+													<option value="idu1">am-pisetta</option>
+													<option value="idu2">am-bouveret</option>
+													<option value="idu3">ut-luongo</option>
+													<option value="idu4">am-obrelli</option>
+													<option value="idu5">ut-pisoni</option>
+												</select> 
+											</div>
+										</td>
+										<td>
+											<a href="#" class="button special fit">Aggiungi</a>
+										</td>	
+									
+										<td>
+											<div class="select-wrapper">
+												<select id="configurazione_idutente">
+													<option value="idu1">am-pisetta</option>
+													<option value="idu2">am-bouveret</option>
+													<option value="idu3">ut-luongo</option>
+													<option value="idu4">am-obrelli</option>
+													<option value="idu5">ut-pisoni</option>
+												</select> 
+											</div>
+										</td>
+										<td>
+											<a href="#" class="button special fit">Aggiungi</a>
+										</td>	
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
+						<div class="6u$ 12u$(medium)">
+						<br>
+							<h4>Calendarizzazione</h4>
+							<table class="alt">
+								<thead>
+									<tr>
+										<th>Giorno</th>
+										<th>Ora</th>
+									</tr>
+								</thead>
+								<tbody>
+                                <tr><td></td><td></td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<div class="row 200%">
+						<div class="6u 12u$(medium)">
+							<h4>Elenco utenti autorizzati</h4>
+							<table class="alt">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Nome</th>
+										<th>Tipo</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									
+									
+								</tbody>
+							</table>
+						</div>
+						
+						<div class="6u$ 12u$(medium)">
+							<h4>Elenco utenti che riceveranno le notifiche</h4>
+							<table class="alt">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Nome</th>
+										<th>Tipo</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<a href="#" class="button special fit">Salva programma</a>
+				</div>
+			</div>
+		</section>
+		
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<div class="flex">
+					<div class="copyright">
+						&copy; 2018 Sito web sviluppato da CoopWare fondata da 3INB ITT Buonarroti-Pozzo per Federazione Trentina della Cooperazione
+						<br><a href="https://templated.co">Template</a>.
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

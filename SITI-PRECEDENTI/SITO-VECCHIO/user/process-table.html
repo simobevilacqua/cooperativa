@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<!--
+	Theory by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Tabella processi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="home.html" class="logo">Portale Gestione Processi</a>
+					<nav id="nav">
+						<a href="program-table.html">Gestione programmi</a>
+						<a href="process-table.html">Visualizza processi</a>						
+						<a href="utente.html">Modifica profilo</a>
+						<a href="../index.html">Paolo.Pisetta, Disconnetti</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- Main -->
+		<section id="main" class="wrapper">
+			<div class="inner">
+				<header class="align-center">
+					<h2>Elenco processi</h2>
+				</header>
+				<div class="table-wrapper">
+					<table class="alt">
+						<thead>
+							<tr>
+								<th>ID Programma</th>
+								<th>Stato</th>
+								<th>Utente</th>
+								<th>Tipo</th>
+								<th>Data Avvio</th>
+								<th>Data Fine</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input type = "text" value = ""></td>
+								<td>
+									<div class="select-wrapper">
+										<select name="STATO">
+                                        	<option value="" selected>--</option>
+											<option value="esecuzione">In esecuzione</option>
+											<option value="terminato">Terminato</option>
+											<option value="attesa">In Attesa</option>
+											<option value="interrotto">Interrotto</option>
+										</select>
+									</div>
+								</td>
+								<td><input type = "text" value = ""></td>
+								<td>
+									<div class="select-wrapper">
+										<select name = "TIPO">
+                                        	<option value = "" selected>--</option>
+											<option value = "tutti">Tutti</option>
+											<option value = "periodico">Periodico</option>
+											<option value = "achiamata">A Richiesta</option>
+										</select>
+									</div>
+								</td>
+								<td><input type="date" name="data"></td>
+								<td><input type = "date" name="date"></td>
+								<td><a href="#" class="button special fit">Cerca</a></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					
+					<form>
+						<table class="alt">
+							<thead>
+								<tr>
+									<th>ID progr</th>
+									<th>Descrizione</th>
+									<th>Codice utente</th>
+									<th>Descrizione Utente</th>
+									<th>Tipo Utente</th>
+									<th>ID processo</th>
+									<th>Tipo processo</th>
+									<th>Ora inizio</th>
+									<th>Ora fine</th>
+									<th>Stato</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>a001</td>
+									<td>backup utenti</td>
+									<td>ut-Luongo</td>
+									<td>Leonardo Luongo</td>
+									<td>utente</td>
+									<td>11</td>
+									<td>Periodico</td>
+									<td>23;45</td>
+									<td>00:00</td>
+									<td>terminated</td>
+								</tr>
+								<tr>
+									<td>a002</td>
+									<td>backup processi</td>
+									<td>am-Pisetta</td>
+									<td>Paolo Pisetta</td>
+									<td>amministratore</td>
+									<td>4</td>
+									<td>Periodico</td>
+									<td>12;05</td>
+									<td>----</td>
+									<td>waiting</td>
+								</tr>
+								<tr>
+									<td>d087</td>
+									<td>restore utenti</td>
+									<td>ut-Pisetta</td>
+									<td>Paolo Pisetta</td>
+									<td>utente</td>
+									<td>123</td>
+									<td>Richiesta</td>
+									<td>04:34</td>
+									<td>----</td>
+									<td>running</td>
+								</tr>
+								<tr>
+									<td>d140</td>
+									<td>calcolo stipendi</td>
+									<td>am-Luongo</td>
+									<td>Leonardo Luongo</td>
+									<td>amministratore</td>
+									<td>628</td>
+									<td>Richiesta</td>
+									<td>22:18</td>
+									<td>----</td>
+									<td>running</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+		</section>
+		
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<div class="flex">
+					<div class="copyright">
+						&copy; 2018 Sito web sviluppato da CoopWare fondata da 3INB ITT Buonarroti-Pozzo per Federazione Trentina della Cooperazione
+						<br><a href="https://templated.co">Template</a>.
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

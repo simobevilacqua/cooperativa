@@ -1,0 +1,5 @@
+-accesso login con autenticazione
+-implementato il file account.txt nella cartella account
+-modificato js in login.js
+-modificato login.html
+-mostra password

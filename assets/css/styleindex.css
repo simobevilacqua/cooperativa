@@ -1,0 +1,106 @@
+body{
+	background-color:white;
+	color:white;
+	font-family:calibri;
+}
+div.logo{
+	
+	text-align:center;
+	
+}
+
+div.login{
+	background-color:#005591;
+	height:400px;
+	width:700px;
+	margin:auto;
+	border-radius:30px;
+	margin-top:10px;
+	text-align:center;
+	font-size: 20px;
+}
+form{
+	padding:10%;
+	margin:0;
+	
+}
+.button {
+    
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+	border-radius:30px;
+    font-size: 22px;
+	background-color: #005591; 
+    color: white; 
+	border: 2px solid white;
+	-webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+
+.button:hover {
+    background-color: white;
+    color: #005591;
+	border: 2px solid #005591;
+	
+}
+.input{
+	border-radius:10px;
+	text-decoration:none;
+	text-align:center;
+	
+}
+footer{
+	background-color:#005591;
+	width:100%;
+	height:100px;
+position: absolute;
+bottom: 0;
+
+left: 0;
+
+
+}
+.input:focus{
+	outline: none;
+}
+.button:focus{ 
+outline: none;
+}
+
+.footerleft{
+	display:inline-block;
+	width:14%;
+	height:100%
+	
+}
+.footerright{
+	display:inline-block;
+	width:15%;
+	height:100%;
+	text-align:center;
+	
+}
+.footercenter{
+	display:inline-block;
+	height:100%;
+	width:70%;
+	
+	text-align:center;
+	vertical-align:center;
+	font-size:40px;
+}
+.allfooter{
+	height:100%;
+}
+.testofooter{
+	margin:0;
+}
+
+.tabella{
+	text-align:center;
+	color: black;
+}
