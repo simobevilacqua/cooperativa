@@ -22,7 +22,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
 	</head>
-	<body class="subpage" onload="load()">
+	<?php
+	if($_SESSION["query"]){
+		$rtn = "query";
+		echo "<body class='subpage' onload=\"alert($_SESSION[$rtn])\">";
+		$_SESSION["query"] = null;
+	}else{
+		echo "<body class='subpage'";
+	}
+	?>
 
 		<!-- Header -->
 		<header id="header">
@@ -65,13 +73,14 @@
 								$query = "SELECT * FROM utente ORDER BY IDutente";
 								$res = mysqli_query($conn, $query);
 								while($row = mysqli_fetch_array($res)) {
+
 									echo("<tbody><tr>");
 									echo("<td>" . $row['IDutente'] . "</td>");
 									echo("<td>" . $row['nome'] . "</td>");
 									echo("<td>" . $row['email'] . "</td>");
 									echo("<td>" . $row['tipo'] . "</td>");
-									echo("<td><button type='submit' name='modifica'>Modifica</button></td>");
-									echo("<td><button type='submit' name='elimina'>Elimina</button></td>");
+									echo("<td><form action='gestione-utente-modifica.php' method='POST'><button type='submit' name='modifica' value='" . $row['IDutente'] . "'>Modifica</button></form></td>");
+									echo("<td><form action='gestione-utente-modifica.php' method='POST'><button type='submit' name='elimina' value='" . $row['IDutente'] . "'>Elimina</button></form></td>");
 									echo("</tr></tbody>");
 								}
 
@@ -79,7 +88,7 @@
 							?>
 
                             </table>
-                            <td><a href="#" class="button special fit">Aggiungi utente</a></td>
+                            <td><a href="gestione-utente-modifica.php" class="button special fit">Aggiungi utente</a></td>
                         </form>
                     </div>
 				</div>

@@ -30,24 +30,6 @@ var utentiObj 	= JSON.parse(utentiJSON);
     }
 ];*/
 
-function load() {
-    $("#alt").empty();
-    $("#res").remove();
-    
-    //carica l'intestazione della tabella
-    $("#alt").append("<thead><tr><th><a id='username' onclick='sort(this.id)'>ID utente</a></th><th><a id='nome' onclick='sort(this.id)'>Nome Cognome</a></th><th><a id='email' onclick='sort(this.id)'>Email</a></th><th><a id='permesso' onclick='sort(this.id)'>Tipo utente</a></th><th><a id='modifica'>Modifica</a></th><th><a id='elimina'>Elimina</a></th></tr></thead>");
-
-    //var sql = "SELECT * FROM " + table_name;
-    for(var i=0; i<utentiObj.utenti.length; i++) {
-        $("#alt").append("<tbody><tr><td>"+utentiObj.utenti[i].username
-			+"</td><td>"+utentiObj.utenti[i].nome
-			+"</td><td>"+utentiObj.utenti[i].email
-			+"</td><td>"+utentiObj.utenti[i].permesso
-			+"</td><td><a href='gestione-utente-modifica.html' class='button special fit' onclick='modificautente("+i+")'>Modifica</a></td>"
-			+"<td><a href='#' class='button special fit' onclick='eliminautente("+i+")'>Elimina</a></td></tr></tbody>");
-    }
-}
-
 sortDir = true;//true:crescente, false:decrescente
 
 function sort(field) {

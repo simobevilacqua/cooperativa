@@ -1,3 +1,53 @@
+<?php	
+	session_start();
+	include "../assets/php/funzioni.php";
+
+	if(!isset($_SESSION['log'])) {
+		session_unset();
+		session_destroy();
+
+		header("Location: ../index.php");
+	}
+
+	if(isset($_POST["aggiorna"])){
+		$conn = connection();
+		
+        $id = $_REQUEST["id"];
+        $nome = $_REQUEST["nome"];
+        $email = $_REQUEST["email"];
+        $psw = $_REQUEST["password"];
+        $category = $_REQUEST["category"];
+
+        $modifica = "UPDATE utente SET psw='{$psw}', nome='{$nome}', email='{$email}', tipo='{$category}' WHERE IDutente = $id";
+
+        if(mysqli_query($conn, $modifica)){
+			$_SESSION["query"] = "'Modifica avvenuta con successo'";
+		}else{
+			$_SESSION["query"] = "'Modifica fallita'";
+		}
+
+		
+		mysqli_close($conn);
+		header("location: gestione-utente.php");
+	}
+
+	if(isset($_POST["delete"])){
+		$conn = connection();
+
+		$id = $_REQUEST["id"];
+        $elimina = "DELETE FROM utente WHERE IDutente = $id";
+
+        if(mysqli_query($conn, $elimina)){
+			$_SESSION["query"] = "'Eliminazione avvenuta con successo'";
+		}else{
+			$_SESSION["query"] = "'Eliminazione fallita'";
+		}
+		
+		mysqli_close($conn);
+		header("location: gestione-utente.php");
+	}
+
+?>
 <!DOCTYPE HTML>
 <!--
 	Theory by TEMPLATED
@@ -31,46 +81,155 @@
 		<!-- Main -->
 			<section id="main" class="wrapper">
 				<div class="inner">
+
+				<?php
+
+					if (isset($_POST["modifica"])) {
+						$conn = connection();
+						
+						$getUser = "SELECT * FROM utente WHERE IDutente = " . $_POST["modifica"] . "";
+
+						$res = mysqli_query($conn, $getUser);
+						if(mysqli_num_rows($res) != 0) {
+							while($row = mysqli_fetch_array($res)) {
+				?>
+
 					<!-- Form -->
 					<h3>Gestisci l'account</h3>
-					<form method="post" action="#">
+					<form method="POST" action="gestione-utente-modifica.php">
 						<h4>ID utente:</h4>
 						<div class="6u 12u$(xsmall)">
-								<input id= "iduser" type="email" placeholder="ID utente" />
-							</div>
+							<input type="text" name="id" value="<?php echo $row["IDutente"]?>" readonly/>
+						</div>
 						<br>
-						<h4>Nome Cognome:</h4>
+						<h4>Nome:</h4>
 						<div class="6u 12u$(xsmall)">
-								<input id = "nomeecognome" type="email" placeholder="Nome Cognome" />
-							</div>
+							<input type="text" name="nome" value="<?php echo $row["nome"]?>" required/>
+						</div>
 						<br>
 						<h4>Email:</h4>
 						<div class="6u 12u$(xsmall)">
-							<input type="email" name="email" id="email" value="" placeholder="Email" />
+							<input type="email" name="email" value="<?php echo $row["email"]?>" required/>
 						</div>
 						<br>
 						<h4>Password:</h4>
 						<div class="6u 12u$(xsmall)">
-							<input type="password" name="password" id="password" value="" placeholder="Password" />
+							<input type="text" name="password" value="<?php echo $row["psw"]?>" required/>
 						</div>
 						<br>
 						<h4>Tipo utente:</h4>
 						<div class="select-wrapper 6u 12u$(xsmall)">
-							<select name="category" id="category">
-								<option value="">- Category -</option>
-								<option value="am">Amministratore</option>
-								<option value="ut">User</option>
+							<select name="category">
+								<option value="<?php echo $row["tipo"]?>"><?php echo $row["tipo"]?></option>
+								<option value="admin">Amministratore</option>
+								<option value="utente">Utente</option>
 							</select>
 						</div>
 						<br>
 						<div class="6u 12u$(xsmall)">
 							<br>
-							<a href="gestione-utente.php" class="button special fit" onclick = "aggiorna()">Aggiorna</a>
+							<input type="submit" class="button special fit" name="aggiorna" value="Aggiorna"></a>
 						</div>
 
 					</form>
-				</div>
-			</section>
+			</div>
+		</section>
+
+				<?php
+							}
+						}
+					} else if (isset($_POST["elimina"])){
+							$conn = connection();
+							
+							$getUser = "SELECT * FROM utente WHERE IDutente = " . $_POST["elimina"] . "";
+
+							$res = mysqli_query($conn, $getUser);
+							if(mysqli_num_rows($res) != 0) {
+								while($row = mysqli_fetch_array($res)) {
+				?>
+
+					<!-- Form -->
+					<h3>Gestisci l'account</h3>
+					<form method="POST" action="gestione-utente-modifica.php">
+						<h4>ID utente:</h4>
+						<div class="6u 12u$(xsmall)">
+							<input type="text" name="id" value="<?php echo $row["IDutente"]?>" readonly/>
+						</div>
+						<br>
+						<h4>Nome:</h4>
+						<div class="6u 12u$(xsmall)">
+							<input type="text" name="nome" value="<?php echo $row["nome"]?>" readonly/>
+						</div>
+						<br>
+						<h4>Email:</h4>
+						<div class="6u 12u$(xsmall)">
+							<input type="email" name="email" value="<?php echo $row["email"]?>" readonly/>
+						</div>
+						<br>
+						<h4>Password:</h4>
+						<div class="6u 12u$(xsmall)">
+							<input type="text" name="password" value="<?php echo $row["psw"]?>" readonly/>
+						</div>
+						<br>
+						<h4>Tipo utente:</h4>
+						<div class="select-wrapper 6u 12u$(xsmall)">
+							<input type="text" name="category" value="<?php echo $row["tipo"]?>" readonly/>
+						</div>
+						<br>
+						<div class="6u 12u$(xsmall)">
+							<br>
+							<input type="submit" class="button special fit" name="delete" value="Elimina"></a>
+						</div>
+
+					</form>
+			</div>
+		</section>
+
+				<?php
+							}
+						}
+					}else{
+				?>
+
+					<!-- Form -->
+					<h3>Gestisci l'account</h3>
+					<form method="POST" action="gestione-utente-modifica.php">
+						<h4>Nome:</h4>
+						<div class="6u 12u$(xsmall)">
+							<input type="text" name="nome" required/>
+						</div>
+						<br>
+						<h4>Email:</h4>
+						<div class="6u 12u$(xsmall)">
+							<input type="email" name="email" required/>
+						</div>
+						<br>
+						<h4>Password:</h4>
+						<div class="6u 12u$(xsmall)">
+							<input type="text" name="password" required/>
+						</div>
+						<br>
+						<h4>Tipo utente:</h4>
+						<div class="select-wrapper 6u 12u$(xsmall)">
+							<select name="category">
+								<option value="" disabled="disabled">Scegli un tipo di utente</option>
+								<option value="admin">Amministratore</option>
+								<option value="utente">Utente</option>
+							</select>
+						</div>
+						<br>
+						<div class="6u 12u$(xsmall)">
+							<br>
+							<input type="submit" class="button special fit" name="insert" value="Aggiugi"></a>
+						</div>
+
+					</form>
+			</div>
+		</section>
+
+				<?php
+					}
+				?>
 
 		<!-- Footer -->
 		<footer id="footer">
