@@ -18,16 +18,16 @@
         $psw = $_REQUEST["password"];
         $category = $_REQUEST["category"];
 
-        $modifica = "UPDATE utente SET psw='{$psw}', nome='{$nome}', email='{$email}', tipo='{$category}' WHERE IDutente = $id";
-
-        if(mysqli_query($conn, $modifica)){
+		$stmt = $conn->prepare("UPDATE utente SET psw=?, nome=?, email=?, tipo=? WHERE IDutente=?");
+		$stmt->bind_param("ssssi", $psw, $nome, $email, $category, $id);
+		
+        if($stmt->execute()){
 			$_SESSION["query"] = "'Modifica avvenuta con successo'";
 		}else{
 			$_SESSION["query"] = "'Modifica fallita'";
 		}
-
 		
-		mysqli_close($conn);
+		$stmt->close();
 		header("location: gestione-utente.php");
 	}
 
@@ -35,15 +35,38 @@
 		$conn = connection();
 
 		$id = $_REQUEST["id"];
-        $elimina = "DELETE FROM utente WHERE IDutente = $id";
 
-        if(mysqli_query($conn, $elimina)){
+		$stmt = $conn->prepare("DELETE FROM utente WHERE IDutente=?");
+		$stmt->bind_param("i", $id);
+		
+        if($stmt->execute()){
 			$_SESSION["query"] = "'Eliminazione avvenuta con successo'";
 		}else{
 			$_SESSION["query"] = "'Eliminazione fallita'";
 		}
 		
-		mysqli_close($conn);
+		$stmt->close();
+		header("location: gestione-utente.php");
+	}
+
+	if(isset($_POST["insert"])){
+		$conn = connection();
+
+        $nome = $_REQUEST["nome"];
+        $email = $_REQUEST["email"];
+        $psw = $_REQUEST["password"];
+		$category = $_REQUEST["category"];
+		
+		$stmt = $conn->prepare("INSERT INTO utente (psw, nome, email, tipo) VALUES (?,?,?,?)");
+		$stmt->bind_param("ssss", $psw, $nome, $email, $category);
+		
+        if($stmt->execute()){
+			$_SESSION["query"] = "'Inserimento avvenuto con successo'";
+		}else{
+			$_SESSION["query"] = "'Inserimento fallito'";
+		}
+		
+		$stmt->close();
 		header("location: gestione-utente.php");
 	}
 
@@ -119,10 +142,23 @@
 						<br>
 						<h4>Tipo utente:</h4>
 						<div class="select-wrapper 6u 12u$(xsmall)">
-							<select name="category">
+						<select name="category">
 								<option value="<?php echo $row["tipo"]?>"><?php echo $row["tipo"]?></option>
 								<option value="admin">Amministratore</option>
 								<option value="utente">Utente</option>
+								<?php
+									if($row["tipo"] == "utente") {
+								?>
+										<option value="admin">Amministratore</option>
+										<option value="utente" selected>Utente</option>
+								<?php
+									} else {
+								?>
+										<option value="admin" selected>Amministratore</option>
+										<option value="utente">Utente</option>
+								<?php
+									}
+								?>
 							</select>
 						</div>
 						<br>

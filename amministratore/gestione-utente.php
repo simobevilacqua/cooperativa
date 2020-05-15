@@ -23,12 +23,12 @@
 		<link rel="stylesheet" href="../assets/css/main.css" />
 	</head>
 	<?php
-	if($_SESSION["query"]){
+	if(isset($_SESSION["query"])){
 		$rtn = "query";
 		echo "<body class='subpage' onload=\"alert($_SESSION[$rtn])\">";
 		$_SESSION["query"] = null;
 	}else{
-		echo "<body class='subpage'";
+		echo "<body class='subpage'>";
 	}
 	?>
 
