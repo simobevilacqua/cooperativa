@@ -142,14 +142,7 @@
 						<br>
 						<h4>Tipo utente:</h4>
 						<div class="select-wrapper 6u 12u$(xsmall)">
-<<<<<<< HEAD
 						<select name="category">
-								<option value="<?php echo $row["tipo"]?>"><?php echo $row["tipo"]?></option>
-								<option value="admin">Amministratore</option>
-								<option value="utente">Utente</option>
-=======
-							<select name="category">
->>>>>>> e4424f10b35c81d299cc1998ed86c0c6f66aa989
 								<?php
 									if($row["tipo"] == "utente") {
 								?>
