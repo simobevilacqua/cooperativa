@@ -54,7 +54,6 @@
 						<h2>Elenco utenti</h2>
 					</header>
                     <div class="table-wrapper">
-                        <form action="#" method="POST">
 						<table class="alt" id="alt">
 							<thead>
 								<tr>
@@ -87,9 +86,8 @@
 								mysqli_close($conn);
 							?>
 
-                            </table>
-                            <td><a href="gestione-utente-modifica.php" class="button special fit">Aggiungi utente</a></td>
-                        </form>
+						</table>
+						<td><a href="gestione-utente-modifica.php" class="button special fit">Aggiungi utente</a></td>
                     </div>
 				</div>
 			</section>
