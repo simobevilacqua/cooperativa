@@ -120,9 +120,19 @@
 						<h4>Tipo utente:</h4>
 						<div class="select-wrapper 6u 12u$(xsmall)">
 							<select name="category">
-								<option value="<?php echo $row["tipo"]?>"><?php echo $row["tipo"]?></option>
-								<option value="admin">Amministratore</option>
-								<option value="utente">Utente</option>
+								<?php
+									if($row["tipo"] == "utente") {
+								?>
+										<option value="admin">Amministratore</option>
+										<option value="utente" selected>Utente</option>
+								<?php
+									} else {
+								?>
+										<option value="admin" selected>Amministratore</option>
+										<option value="utente">Utente</option>
+								<?php
+									}
+								?>
 							</select>
 						</div>
 						<br>
