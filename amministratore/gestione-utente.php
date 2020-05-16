@@ -71,7 +71,7 @@
 
 								$query = "SELECT * FROM utente ORDER BY IDutente";
 								$res = mysqli_query($conn, $query);
-								
+
 								while($row = mysqli_fetch_array($res)) {
 
 									echo("<tbody><tr>");
@@ -111,4 +111,5 @@
 			<script src="../assets/js/main.js"></script>
 			<script src="../assets/js/modificautente.js"></script>
 	</body>
+	
 </html>
