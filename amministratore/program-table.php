@@ -98,7 +98,11 @@
 						}
 
 						$res = mysqli_query($conn, $query);
+
+						$ok = false;
 						while($row = mysqli_fetch_array($res)) {
+
+							$ok = true;
 
 							echo("<tbody><tr>");
 							echo("<td>" . $row['IDprogramma'] . "</td>");
@@ -107,6 +111,12 @@
 							echo("<td>" . $row['IDprerequisito'] . "</td>");
 							echo("<td><form action='program-table-modifica.php' method='POST'><button type='submit' name='modifica' value='" . $row['IDprogramma'] . "'>Modifica</button></form></td>");
 							echo("<td><form action='#' method='POST'><button type='submit' name='elimina' value='" . $row['IDprogramma'] . "' onclick='return confirm(\"Sei sicuro di voler eliminare questo programma?\");'>Elimina</button></form></td>");
+							echo("</tr></tbody>");
+						}
+
+						if(!$ok) {
+							echo("<tbody><tr>");
+							echo("<td style='text-align: center' colspan='6'>Nessun programma trovato</td>");
 							echo("</tr></tbody>");
 						}
 
