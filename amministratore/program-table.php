@@ -100,7 +100,7 @@
 							echo("<td>" . $row['descrizioneLunga'] . "</td>");
 							echo("<td>" . $row['IDprerequisito'] . "</td>");
 							echo("<td><form action='program-table-modifica.php' method='POST'><button type='submit' name='modifica' value='" . $row['IDprogramma'] . "'>Modifica</button></form></td>");
-							echo("<td><form action='#' method='POST'><button type='submit' name='elimina' value='" . $row['IDprogramma'] . "'>Elimina</button></form></td>");
+							echo("<td><form action='#' method='POST'><button type='submit' name='elimina' value='" . $row['IDprogramma'] . "' onclick='return confirm(\"Sei sicuro di voler eliminare questo programma?\");'>Elimina</button></form></td>");
 							echo("</tr></tbody>");
 						}
 
