@@ -9,7 +9,7 @@
 		header("Location: ../index.php");
 	}
 
-	if($_REQUEST['elimina']) {
+	if(isset($_REQUEST['elimina'])) {
 
 		$conn = connection();
 
