@@ -8,6 +8,19 @@
 
 		header("Location: ../index.php");
 	}
+
+	if($_REQUEST['elimina']) {
+
+		$conn = connection();
+
+		$id = $_REQUEST['elimina'];
+
+		$query = "DELETE FROM programma WHERE IDprogramma = $id";
+		$res = mysqli_query($conn, $query);
+
+		mysqli_close($conn);
+
+	}
 ?>
 
 <!DOCTYPE HTML>
@@ -63,39 +76,37 @@
                             </tbody>
                         </table>
 					</form>
-					<form name="modulo">
-						<table id="alt" class="alt">
-						<thead>
-							<tr>
-								<th><a id="id" onclick="sort(this.id)">ID Programma</a></th>
-								<th><a id="nome" onclick="sort(this.id)">Nome</a></th>
-								<th><a id="descrizione" onclick="sort(this.id)">Descrizione</a></th>
-								<th><a id="id" onclick="sort(this.id)">ID Prerequisito</a></th>
-								<th><a id="modifica">Modifica</a></th>
-								<th><a id="elimina">Elimina</a></th>
-							</tr>
-						</thead>
-						<?php
-							$conn = connection();
+					<table id="alt" class="alt">
+					<thead>
+						<tr>
+							<th><a id="id">ID Programma</a></th>
+							<th><a id="nome">Nome</a></th>
+							<th><a id="descrizione">Descrizione</a></th>
+							<th><a id="id">ID Prerequisito</a></th>
+							<th><a id="modifica">Modifica</a></th>
+							<th><a id="elimina">Elimina</a></th>
+						</tr>
+					</thead>
+					<?php
+						$conn = connection();
 
-							$query = "SELECT * FROM programma ORDER BY IDprogramma";
-							$res = mysqli_query($conn, $query);
-							while($row = mysqli_fetch_array($res)) {
+						$query = "SELECT * FROM programma ORDER BY IDprogramma";
+						$res = mysqli_query($conn, $query);
+						while($row = mysqli_fetch_array($res)) {
 
-								echo("<tbody><tr>");
-								echo("<td>" . $row['IDprogramma'] . "</td>");
-								echo("<td>" . $row['nome'] . "</td>");
-								echo("<td>" . $row['descrizioneLunga'] . "</td>");
-								echo("<td>" . $row['IDprerequisito'] . "</td>");
-								echo("<td><form action='program-table-modifica.php' method='POST'><button type='submit' name='modifica' value='" . $row['IDprogramma'] . "'>Modifica</button></form></td>");
-								echo("<td><form action='program-table-modifica.php' method='POST'><button type='submit' name='elimina' value='" . $row['IDprogramma'] . "'>Elimina</button></form></td>");
-								echo("</tr></tbody>");
-							}
+							echo("<tbody><tr>");
+							echo("<td>" . $row['IDprogramma'] . "</td>");
+							echo("<td>" . $row['nome'] . "</td>");
+							echo("<td>" . $row['descrizioneLunga'] . "</td>");
+							echo("<td>" . $row['IDprerequisito'] . "</td>");
+							echo("<td><form action='program-table-modifica.php' method='POST'><button type='submit' name='modifica' value='" . $row['IDprogramma'] . "'>Modifica</button></form></td>");
+							echo("<td><form action='#' method='POST'><button type='submit' name='elimina' value='" . $row['IDprogramma'] . "'>Elimina</button></form></td>");
+							echo("</tr></tbody>");
+						}
 
-							mysqli_close($conn);
-						?>
-						</table>
-					</form>
+						mysqli_close($conn);
+					?>
+					</table>
 					<a href="program-table-inserisci.php" class="button special fit" onClick="impostaID('')">Aggiungi programma</a>
 				</div>
 			</div>
