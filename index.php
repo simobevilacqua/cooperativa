@@ -107,6 +107,7 @@
 				  }
 				});
 			</script>
+			<script src="assets/js/login.js" type="text/javascript"></script>
 			<script src="assets/js/js.js" type="text/javascript"></script>
 	</body>
 </html>
