@@ -114,11 +114,11 @@ function validate(){
 		{
 			if(utentiObj.utenti[i].permesso == 'am')
 			{	
-				window.location.assign("amministratore/home.html");
+				window.location.assign("amministratore/home.php");
 			}
             else 
 			{
-				window.location.assign("user/home.html");
+				window.location.assign("user/home.php");
 			}
 		}        
 	}

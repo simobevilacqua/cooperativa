@@ -38,7 +38,7 @@ function search() {
 				+"</td><td>"+programmiObj.programmi[i].descrizione
 				+"</td><td>"+programmiObj.programmi[i].durataprevista
 				+"</td><td>"+programmiObj.programmi[i].tipo
-				+"</td><td><a href='program-table-modifica.html' class='button special fit' onclick='modificaprogramma("+i+")'>Modifica</a>"
+				+"</td><td><a href='program-table-modifica.php' class='button special fit' onclick='modificaprogramma("+i+")'>Modifica</a>"
 				+"</td><td><a href='#' class='button special fit' onclick='eliminaprogramma("+i+")'>Elimina</a></td></tr></tbody>");
             }
         }
@@ -80,7 +80,7 @@ function sort(field) {
 
 function modificaprogramma(i){
 	localStorage.setItem("Indiceprogramma", i);
-	window.location.assign("program-table-modifica.html");
+	window.location.assign("program-table-modifica.php");
 }
 
 function eliminaprogramma(i){
