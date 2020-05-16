@@ -60,7 +60,7 @@
 					<h2>Tabella programmi</h2>
 				</header>
 				<div class="table-wrapper">
-                    <form name="mod" id="mod">
+                    <form name="mod" id="mod" method="POST">
                         <table class="alt">
                             <thead>
                                 <tr>
@@ -71,7 +71,7 @@
                             <tbody>
                                 <tr>
                                     <td><input name="id" type="text" value=""></td>
-                                    <td><input type="button" value="Cerca" onclick="return search()" class="button special fit"/></td>
+                                    <td><input type="submit" name="cerca" value="Cerca" class="button special fit"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -90,7 +90,13 @@
 					<?php
 						$conn = connection();
 
-						$query = "SELECT * FROM programma ORDER BY IDprogramma";
+						$query = "SELECT * FROM programma";
+
+						if(isset($_REQUEST['cerca'])) {
+							$id = $_REQUEST['id'];
+							$query .= " WHERE IDprogramma = $id";
+						}
+
 						$res = mysqli_query($conn, $query);
 						while($row = mysqli_fetch_array($res)) {
 
