@@ -17,7 +17,7 @@
 		$query->bind_param("ssi", $_REQUEST['nome'], $_REQUEST['email'], $_REQUEST['IDutente']);
 		$query->execute();
 
-		mysqli_close($conn);
+		$stmt->close();
 	}
 
 ?>
