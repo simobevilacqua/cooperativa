@@ -18,7 +18,7 @@
         $psw = $_REQUEST["password"];
         $category = $_REQUEST["category"];
 
-		$stmt = $conn->prepare("UPDATE utente SET psw=?, nome=?, email=?, tipo=? WHERE IDutente=?");
+		$stmt = $conn->prepare("UPDATE utente SET psw = ?, nome = ?, email = ?, tipo = ? WHERE IDutente = ?");
 		$stmt->bind_param("ssssi", $psw, $nome, $email, $category, $id);
 		
         if($stmt->execute()){
@@ -36,7 +36,7 @@
 
 		$id = $_REQUEST["id"];
 
-		$stmt = $conn->prepare("DELETE FROM utente WHERE IDutente=?");
+		$stmt = $conn->prepare("DELETE FROM utente WHERE IDutente = ?");
 		$stmt->bind_param("i", $id);
 		
         if($stmt->execute()){
