@@ -70,8 +70,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input name="id" type="text" value=""></td>
-                                    <td><input type="submit" name="cerca" value="Cerca" class="button special fit"/></td>
+                                    <td><input type="text" name="id"></td>
+                                    <td><input type="submit" name="cerca" value="Cerca" class="button special fit"></td>
                                 </tr>
                             </tbody>
                         </table>
