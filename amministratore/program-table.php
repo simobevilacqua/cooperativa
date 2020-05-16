@@ -64,13 +64,22 @@
                         <table class="alt">
                             <thead>
                                 <tr>
-                                    <th>ID Programma</th>
-                                    <th>Descrizione</th>
+                                    <th>Modalità ricerca</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="number" name="id" required></td>
+                                    <td>
+										<select name="mode">
+											<option value="IDprogramma">ID Programma</option>
+											<option value="nome">Nome</option>
+											<option value="descrizioneLunga">Descrizione</option>
+											<option value="IDprerequisito">ID Prerequisito</option>
+										</select>
+									</td>
+									<td>
+										<input type="text" name="scelta" required>
+									</td>
                                     <td><input type="submit" name="cerca" value="Cerca" class="button special fit"></td>
                                 </tr>
                             </tbody>
@@ -93,8 +102,14 @@
 						$query = "SELECT * FROM programma";
 
 						if(isset($_REQUEST['cerca'])) {
-							$id = $_REQUEST['id'];
-							$query .= " WHERE IDprogramma = $id";
+							$mode = $_REQUEST['mode'];
+							$scelta = $_REQUEST['scelta'];
+
+							if($mode == "descrizioneLunga"){
+								$query .= " WHERE $mode LIKE '%$scelta%'";
+							}else{
+								$query .= " WHERE $mode = '$scelta'";
+							}
 						}
 
 						$res = mysqli_query($conn, $query);
