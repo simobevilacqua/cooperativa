@@ -1,3 +1,16 @@
+<?php
+
+	session_start();
+	include "../assets/php/funzioni.php";
+
+	if(!isset($_SESSION['log'])) {
+		session_unset();
+		session_destroy();
+
+		header("Location: ../index.php");
+	}
+	
+?>
 <!DOCTYPE HTML>
 <!--
 	Theory by TEMPLATED
