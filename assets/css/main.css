@@ -1994,6 +1994,10 @@
 		margin: 0 0 0 0;
 	}
 
+	form > button{
+    	width: 100%;
+    }
+
 	label {
 		color: #555;
 		display: block;
