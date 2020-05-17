@@ -9,6 +9,7 @@
 		header("Location: ../index.php");
 	}
 ?>
+
 <!DOCTYPE HTML>
 <!--
 	Theory by TEMPLATED
