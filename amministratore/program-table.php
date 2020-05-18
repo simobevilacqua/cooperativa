@@ -105,11 +105,7 @@
 							$mode = $_REQUEST['mode'];
 							$scelta = $_REQUEST['scelta'];
 
-							if($mode == "descrizioneLunga"){
-								$query .= " WHERE $mode LIKE '%$scelta%'";
-							}else{
-								$query .= " WHERE $mode = '$scelta'";
-							}
+							$query .= " WHERE $mode LIKE '%$scelta%'";
 						}
 
 						$res = mysqli_query($conn, $query);

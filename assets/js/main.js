@@ -64,3 +64,14 @@
 	});
 
 })(jQuery);
+
+function control(){
+	rtn = false;
+    ok = confirm("Sei sicuro di eliminare questo utente?");
+    if(ok){
+        rtn = true;
+    }else{
+        alert("Operazione annullata!");
+    }
+    return rtn;
+}

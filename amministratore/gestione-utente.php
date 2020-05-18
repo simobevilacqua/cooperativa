@@ -9,6 +9,29 @@
 
 		header("Location: ../index.php");
 	}
+
+	if(isset($_POST["elimina"])){
+
+		//Connessione database
+		$conn = connection();
+
+		//Mi salvo i valori ottenuti nel form in delle variabili
+		$id = $_REQUEST["elimina"];
+
+		//Faccio il Prepared Statement e poi al posto dei placeholder gli assegno il valore delle varibili
+		$stmt = $conn->prepare("DELETE FROM utente WHERE IDutente = ?");
+		$stmt->bind_param("i", $id);
+		
+		//Eseguo la query e controllo se è andato a buon fine
+        if($stmt->execute()){
+			$_SESSION["query"] = "'Eliminazione avvenuta con successo'";
+		}else{
+			$_SESSION["query"] = "'Eliminazione fallita'";
+		}
+		
+		//Chiudo la connessione
+		$stmt->close();
+	}
 ?>
 
 <!DOCTYPE HTML>
@@ -39,7 +62,7 @@
 	}else{
 		echo "<body class='subpage'>";
 	}
-	
+
 	?>
 
 		<!-- Header -->
@@ -95,7 +118,7 @@
 
 									//Due form che servono per modificare o eliminare un utente, entrambi i bottoni hanno come valore l'id dell'utente della riga in cui sono
 									echo("<td><form action='gestione-utente-modifica.php' method='POST'><button type='submit' name='modifica' value='" . $row['IDutente'] . "'>Modifica</button></form></td>");
-									echo("<td><form action='gestione-utente-modifica.php' method='POST'><button type='submit' name='elimina' value='" . $row['IDutente'] . "'>Elimina</button></form></td>");
+									echo("<td><form action='gestione-utente.php' method='POST' onclick='return control();'><button type='submit' name='elimina' value='" . $row['IDutente'] . "'>Elimina</button></form></td>");
 									echo("</tr></tbody>");
 								}
 

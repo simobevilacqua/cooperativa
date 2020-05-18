@@ -39,30 +39,6 @@
 		header("location: gestione-utente.php");
 	}
 
-	if(isset($_POST["delete"])){
-
-		//Connessione database
-		$conn = connection();
-
-		//Mi salvo i valori ottenuti nel form in delle variabili
-		$id = $_REQUEST["id"];
-
-		//Faccio il Prepared Statement e poi al posto dei placeholder gli assegno il valore delle varibili
-		$stmt = $conn->prepare("DELETE FROM utente WHERE IDutente = ?");
-		$stmt->bind_param("i", $id);
-		
-		//Eseguo la query e controllo se è andato a buon fine
-        if($stmt->execute()){
-			$_SESSION["query"] = "'Eliminazione avvenuta con successo'";
-		}else{
-			$_SESSION["query"] = "'Eliminazione fallita'";
-		}
-		
-		//Chiudo la connessione e reindirizzo alla pagina "gestione-utente.php"
-		$stmt->close();
-		header("location: gestione-utente.php");
-	}
-
 	if(isset($_POST["insert"])){
 
 		//Connessione database
@@ -201,66 +177,6 @@
 				<?php
 							}
 						}
-
-						//Controllo se è stato premuto il bottone per eliminare l'utente
-					} else if (isset($_POST["elimina"])){
-
-						//Connessione database
-						$conn = connection();
-						
-						//Seleziono l'utente con quel determinato IDutente
-						$getUser = "SELECT * FROM utente WHERE IDutente = " . $_POST["elimina"] . "";
-
-						//Eseguo la query e stampo a video i risultati
-						$res = mysqli_query($conn, $getUser);
-						if(mysqli_num_rows($res) != 0) {
-							while($row = mysqli_fetch_array($res)) {
-				?>
-
-					<!-- Form -->
-					<h3>Gestisci l'account</h3>
-					<form method="POST" action="gestione-utente-modifica.php">
-						<h4>ID utente:</h4>
-						<div class="6u 12u$(xsmall)">
-							<input type="text" name="id" value="<?php echo $row["IDutente"]?>" readonly/>
-						</div>
-						<br>
-						<h4>Nome:</h4>
-						<div class="6u 12u$(xsmall)">
-							<input type="text" name="nome" value="<?php echo $row["nome"]?>" readonly/>
-						</div>
-						<br>
-						<h4>Email:</h4>
-						<div class="6u 12u$(xsmall)">
-							<input type="email" name="email" value="<?php echo $row["email"]?>" readonly/>
-						</div>
-						<br>
-						<h4>Password:</h4>
-						<div class="6u 12u$(xsmall)">
-							<input type="text" name="password" value="<?php echo $row["psw"]?>" readonly/>
-						</div>
-						<br>
-						<h4>Tipo utente:</h4>
-						<div class="select-wrapper 6u 12u$(xsmall)">
-							<input type="text" name="category" value="<?php echo $row["tipo"]?>" readonly/>
-						</div>
-						<br>
-						<div class="6u 12u$(xsmall)">
-							<br>
-							
-							<!--Bottone per eliminare l'utente-->
-							<input type="submit" class="button special fit" name="delete" value="Elimina"></a>
-						</div>
-
-					</form>
-			</div>
-		</section>
-
-				<?php
-							}
-						}
-
-						//Entra qui se è stato premuto il bottone per inserire un nuovo utente
 					}else{
 				?>
 
