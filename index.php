@@ -45,7 +45,7 @@
 					  <div class="input-container">
 						<input type="password" id="password" placeholder="Password" name="password" required>
 						<i class="material-icons visibility">visibility_off</i>
-						</div>
+					</div>
 					  <input type="submit" id="blue-button" name="submit" value="ACCEDI"/>
 					</form>
 

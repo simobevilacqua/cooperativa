@@ -103,6 +103,7 @@
 		<title>Gestione utente</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../assets/css/login.css" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
 	</head>
 	<body class="subpage">
@@ -145,7 +146,7 @@
 
 					<!-- Form -->
 					<h3>Gestisci l'account</h3>
-					<form method="POST" action="gestione-utente-modifica.php">
+					<form method="POST" action="gestione-utente-modifica.php" class="login-form">
 						<h4>ID utente:</h4>
 						<div class="6u 12u$(xsmall)">
 							<input type="text" name="id" value="<?php echo $row["IDutente"]?>" readonly/>
@@ -162,8 +163,9 @@
 						</div>
 						<br>
 						<h4>Password:</h4>
-						<div class="6u 12u$(xsmall)">
-							<input type="text" name="password" value="<?php echo $row["psw"]?>" required/>
+						<div class="input-container">
+							<input type="password" id="password" placeholder="Password" name="password" required>
+							<i class="material-icons visibility">visibility_off</i>
 						</div>
 						<br>
 						<h4>Tipo utente:</h4>
@@ -322,5 +324,27 @@
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
 			<script src="../assets/js/modificautente.js"></script>
+
+		<!-- Scripts -->
+		<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+			<script>
+				var input = document.getElementById("password");
+				var input2 = document.getElementById("username");
+				input.addEventListener("keyup", function(event) {
+				  if (event.keyCode === 13) {
+				   event.preventDefault();
+				   document.getElementById("blue-button").click();
+				  }
+				});
+				input.addEventListener("keyup", function(event) {
+				  if (event.keyCode === 13) {
+				   event.preventDefault();
+				   document.getElementById("blue-button").click();
+				  }
+				});
+			</script>
+			<script src="../assets/js/login.js" type="text/javascript"></script>
+			<script src="../assets/js/js.js" type="text/javascript"></script>
+			
 	</body>
 </html>
