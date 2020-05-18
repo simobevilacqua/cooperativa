@@ -2,6 +2,7 @@
 	session_start();
 	include "../assets/php/funzioni.php";
 
+	//Controllo se l'utente si è loggato
 	if(!isset($_SESSION['log'])) {
 		session_unset();
 		session_destroy();
@@ -9,63 +10,82 @@
 		header("Location: ../index.php");
 	}
 
+	//Controllo se l'utente ha premuto il bottone per fare l'aggiornamento di un utente
 	if(isset($_POST["aggiorna"])){
+
+		//Connessione database
 		$conn = connection();
 		
+		//Mi salvo i valori ottenuti nel form in delle variabili
         $id = $_REQUEST["id"];
         $nome = $_REQUEST["nome"];
         $email = $_REQUEST["email"];
         $psw = $_REQUEST["password"];
         $category = $_REQUEST["category"];
 
+		//Faccio il Prepared Statement e poi al posto dei placeholder gli assegno il valore delle varibili
 		$stmt = $conn->prepare("UPDATE utente SET psw = ?, nome = ?, email = ?, tipo = ? WHERE IDutente = ?");
 		$stmt->bind_param("ssssi", $psw, $nome, $email, $category, $id);
 		
+		//Eseguo la query e controllo se è andato a buon fine
         if($stmt->execute()){
 			$_SESSION["query"] = "'Modifica avvenuta con successo'";
 		}else{
 			$_SESSION["query"] = "'Modifica fallita'";
 		}
 		
+		//Chiudo la connessione e reindirizzo alla pagina "gestione-utente.php"
 		$stmt->close();
 		header("location: gestione-utente.php");
 	}
 
 	if(isset($_POST["delete"])){
+
+		//Connessione database
 		$conn = connection();
 
+		//Mi salvo i valori ottenuti nel form in delle variabili
 		$id = $_REQUEST["id"];
 
+		//Faccio il Prepared Statement e poi al posto dei placeholder gli assegno il valore delle varibili
 		$stmt = $conn->prepare("DELETE FROM utente WHERE IDutente = ?");
 		$stmt->bind_param("i", $id);
 		
+		//Eseguo la query e controllo se è andato a buon fine
         if($stmt->execute()){
 			$_SESSION["query"] = "'Eliminazione avvenuta con successo'";
 		}else{
 			$_SESSION["query"] = "'Eliminazione fallita'";
 		}
 		
+		//Chiudo la connessione e reindirizzo alla pagina "gestione-utente.php"
 		$stmt->close();
 		header("location: gestione-utente.php");
 	}
 
 	if(isset($_POST["insert"])){
+
+		//Connessione database
 		$conn = connection();
 
+		//Mi salvo i valori ottenuti nel form in delle variabili
         $nome = $_REQUEST["nome"];
         $email = $_REQUEST["email"];
         $psw = $_REQUEST["password"];
 		$category = $_REQUEST["category"];
 		
+		//Faccio il Prepared Statement e poi al posto dei placeholder gli assegno il valore delle varibili
 		$stmt = $conn->prepare("INSERT INTO utente (psw, nome, email, tipo) VALUES (?,?,?,?)");
 		$stmt->bind_param("ssss", $psw, $nome, $email, $category);
 		
+		//Eseguo la query e controllo se è andato a buon fine
         if($stmt->execute()){
 			$_SESSION["query"] = "'Inserimento avvenuto con successo'";
 		}else{
 			$_SESSION["query"] = "'Inserimento fallito'";
 		}
 		
+		//Chiudo la connessione e reindirizzo alla pagina "gestione-utente.php"
 		$stmt->close();
 		header("location: gestione-utente.php");
 	}
@@ -108,11 +128,16 @@
 
 				<?php
 
+					//Controllo se è stato premuto il bottone per modificare l'utente
 					if (isset($_POST["modifica"])) {
+
+						//Connessione database
 						$conn = connection();
 						
+						//Seleziono l'utente con quel determinato IDutente
 						$getUser = "SELECT * FROM utente WHERE IDutente = " . $_POST["modifica"] . "";
 
+						//Eseguo la query e stampo a video i risultati
 						$res = mysqli_query($conn, $getUser);
 						if(mysqli_num_rows($res) != 0) {
 							while($row = mysqli_fetch_array($res)) {
@@ -162,6 +187,8 @@
 						<br>
 						<div class="6u 12u$(xsmall)">
 							<br>
+
+							<!--Bottone per aggiornare l'utente-->
 							<input type="submit" class="button special fit" name="aggiorna" value="Aggiorna"></a>
 						</div>
 
@@ -172,14 +199,20 @@
 				<?php
 							}
 						}
-					} else if (isset($_POST["elimina"])){
-							$conn = connection();
-							
-							$getUser = "SELECT * FROM utente WHERE IDutente = " . $_POST["elimina"] . "";
 
-							$res = mysqli_query($conn, $getUser);
-							if(mysqli_num_rows($res) != 0) {
-								while($row = mysqli_fetch_array($res)) {
+						//Controllo se è stato premuto il bottone per eliminare l'utente
+					} else if (isset($_POST["elimina"])){
+
+						//Connessione database
+						$conn = connection();
+						
+						//Seleziono l'utente con quel determinato IDutente
+						$getUser = "SELECT * FROM utente WHERE IDutente = " . $_POST["elimina"] . "";
+
+						//Eseguo la query e stampo a video i risultati
+						$res = mysqli_query($conn, $getUser);
+						if(mysqli_num_rows($res) != 0) {
+							while($row = mysqli_fetch_array($res)) {
 				?>
 
 					<!-- Form -->
@@ -212,6 +245,8 @@
 						<br>
 						<div class="6u 12u$(xsmall)">
 							<br>
+							
+							<!--Bottone per eliminare l'utente-->
 							<input type="submit" class="button special fit" name="delete" value="Elimina"></a>
 						</div>
 
@@ -222,6 +257,8 @@
 				<?php
 							}
 						}
+
+						//Entra qui se è stato premuto il bottone per inserire un nuovo utente
 					}else{
 				?>
 
@@ -254,6 +291,8 @@
 						<br>
 						<div class="6u 12u$(xsmall)">
 							<br>
+
+							<!--Bottone per inserire un nuovo utente-->
 							<input type="submit" class="button special fit" name="insert" value="Aggiugi"></a>
 						</div>
 

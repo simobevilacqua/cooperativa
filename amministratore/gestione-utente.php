@@ -2,6 +2,7 @@
 	session_start();
 	include "../assets/php/funzioni.php";
 
+	//Controllo se l'utente si è loggato
 	if(!isset($_SESSION['log'])) {
 		session_unset();
 		session_destroy();
@@ -23,14 +24,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
 	</head>
+
 	<?php
+	
+	//Controllo se la query contiene qualche stringa
 	if(isset($_SESSION["query"])){
 		$rtn = "query";
+
+		//Stampo cosa contine la query
 		echo "<body class='subpage' onload=\"alert($_SESSION[$rtn])\">";
 		$_SESSION["query"] = null;
+
+	//Se non contiene nessuna stringa entra qui
 	}else{
 		echo "<body class='subpage'>";
 	}
+	
 	?>
 
 		<!-- Header -->
@@ -68,11 +77,14 @@
 							</thead>
 
 							<?php
+								//Connessione database
 								$conn = connection();
 
+								//Query per ottenere tutti gli utenti presenti nel database
 								$query = "SELECT * FROM utente ORDER BY IDutente";
 								$res = mysqli_query($conn, $query);
 
+								//Stampo tutti gli utenti presenti
 								while($row = mysqli_fetch_array($res)) {
 
 									echo("<tbody><tr>");
@@ -80,6 +92,8 @@
 									echo("<td>" . $row['nome'] . "</td>");
 									echo("<td>" . $row['email'] . "</td>");
 									echo("<td>" . $row['tipo'] . "</td>");
+
+									//Due form che servono per modificare o eliminare un utente, entrambi i bottoni hanno come valore l'id dell'utente della riga in cui sono
 									echo("<td><form action='gestione-utente-modifica.php' method='POST'><button type='submit' name='modifica' value='" . $row['IDutente'] . "'>Modifica</button></form></td>");
 									echo("<td><form action='gestione-utente-modifica.php' method='POST'><button type='submit' name='elimina' value='" . $row['IDutente'] . "'>Elimina</button></form></td>");
 									echo("</tr></tbody>");
@@ -89,6 +103,7 @@
 							?>
 
 						</table>
+						<!--Bottone per aggiungere un utente-->
 						<td><a href="gestione-utente-modifica.php" class="button special fit">Aggiungi utente</a></td>
                     </div>
 				</div>
