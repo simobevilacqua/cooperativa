@@ -53,40 +53,36 @@
 						<thead>
 							<tr>
 								<th>ID programma</th>
+								<th>Nome</th>
 								<th>Descrizione</th>
-								<th>Durata</th>
-								<th>ID Programma prerequisito</th>
-								<th>Descrizione prerequisito</th>
-								<th>Tipologia</th>
+								<th>ID prerequisito</th>
 							</tr>
 						</thead>
+
+						<?php
+
+							$conn = connection();
+							$id = $_REQUEST['modifica'];
+							$query = "SELECT * FROM programma WHERE IDprogramma = $id";
+							$res = mysqli_query($conn, $query);
+							$row = mysqli_fetch_array($res);
+							mysqli_close($conn);
+
+						?>
+
 						<tbody>
 							<tr>
 								<td>
-									<input type="text" id="id_programma" value="">
+									<input type="text" name="IDprogramma" value="<?php echo $row['IDprogramma'] ?>" readonly>
 								</td>
 								<td>
-									<input type="text" id="descrizioneprogramma" value="">
+									<input type="text" name="nome" value="<?php echo $row['nome'] ?>">
 								</td>
 								<td>
-									<input type="text" id="durata" value="">
+									<input type="text" name="descrizioneLunga" value="<?php echo $row['descrizioneLunga'] ?>">
 								</td>
 								<td>
-									<div class="select-wrapper" id="selezionePrerequisito">
-										
-									</div>
-								</td>
-								<td>
-									<input type="text" id="configurazione_prerequisito" value="">
-								</td>
-								<td>
-									<div class="select-wrapper">
-										<select id="configurazione_tipoprogramma">
-											<option>--------</option>
-											<option value="Periodico" selected>Periodico</option>
-											<option value="Richiesta">Su richiesta</option>
-										</select>
-									</div>
+									<input type="text" name="IDprerequisito" value="<?php echo $row['IDprerequisito'] ?>">
 								</td>
 							</tr>
 						</tbody>
