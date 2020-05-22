@@ -73,8 +73,9 @@
 										<div class="select-wrapper">
 											<select id="configurazione_tipoprogramma">
 												<option selected>---</option>
-												<option value="Periodico" >Periodico</option>
-												<option value="Richiesta">Su richiesta</option>
+												<option value="Giornaliero" >Giornaliero</option>
+												<option value="Settimanale">Settimanale</option>
+												<option value="Mensile">Mensile</option>
 											</select>
 										</div>
 									</td>

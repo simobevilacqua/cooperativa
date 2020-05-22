@@ -84,6 +84,16 @@
 								<td>
 									<input type="text" name="IDprerequisito" value="<?php echo $row['IDprerequisito'] ?>">
 								</td>
+								<td>
+									<div class="select-wrapper">
+										<select id="configurazione_tipoprogramma">
+											<option selected>---</option>
+											<option value="Giornaliero" >Giornaliero</option>
+											<option value="Settimanale">Settimanale</option>
+											<option value="Mensile">Mensile</option>
+										</select>
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
