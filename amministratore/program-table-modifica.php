@@ -63,7 +63,7 @@
 
 							$conn = connection();
 							$id = $_REQUEST['modifica'];
-							$query = "SELECT * FROM programma WHERE IDprogramma = $id";
+							$query = "SELECT IDprogramma, nome, descrizioneLunga, IDprerequisito, (SELECT nome FROM programma AS pr2 WHERE pr1.IDprerequisito = pr2.IDprogramma) AS nomePrerequisito FROM programma AS pr1 WHERE IDprogramma = $id";
 							$res = mysqli_query($conn, $query);
 							$row = mysqli_fetch_array($res);
 							mysqli_close($conn);
@@ -85,6 +85,10 @@
 									<input type="text" name="IDprerequisito" value="<?php echo $row['IDprerequisito'] ?>">
 								</td>
 								<td>
+									<input type="text" name="descrizionePrerequisito" value="<?php echo $row['nomePrerequisito'] ?>">
+								</td>
+								<td>	
+
 									<div class="select-wrapper">
 										<select id="configurazione_tipoprogramma">
 											<option selected>---</option>
