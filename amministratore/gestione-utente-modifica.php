@@ -139,8 +139,14 @@
 						</div>
 						<br>
 						<h4>Password:</h4>
-						<div class="input-container">
-							<input type="password" id="password" placeholder="Password" name="password" required>
+						<div class="input-container" style="width:50%">
+							<input type="password" id="password" placeholder="Password" name="password" value="<?php echo $row["psw"]?>" required>
+							<i class="material-icons visibility">visibility_off</i>
+						</div>
+						<br>
+						<h4>Conferma Password:</h4>
+						<div class="input-container" style="width:50%">
+							<input type="password" id="confpassword" placeholder="Password" name="confpassword" required>
 							<i class="material-icons visibility">visibility_off</i>
 						</div>
 						<br>
@@ -245,14 +251,14 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 			<script>
 				var input = document.getElementById("password");
-				var input2 = document.getElementById("username");
+				var input2 = document.getElementById("confpassword");
 				input.addEventListener("keyup", function(event) {
 				  if (event.keyCode === 13) {
 				   event.preventDefault();
 				   document.getElementById("blue-button").click();
 				  }
 				});
-				input.addEventListener("keyup", function(event) {
+				input2.addEventListener("keyup", function(event) {
 				  if (event.keyCode === 13) {
 				   event.preventDefault();
 				   document.getElementById("blue-button").click();
