@@ -85,6 +85,9 @@
                             </tbody>
                         </table>
 					</form>
+
+					<a href="program-table-inserisci.php" class="button special fit" onClick="impostaID('')">Aggiungi programma</a>
+					<br>
 					<table id="alt" class="alt">
 					<thead>
 						<tr>
@@ -134,7 +137,6 @@
 						mysqli_close($conn);
 					?>
 					</table>
-					<a href="program-table-inserisci.php" class="button special fit" onClick="impostaID('')">Aggiungi programma</a>
 				</div>
 			</div>
 		</section>
