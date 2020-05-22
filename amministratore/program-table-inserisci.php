@@ -128,50 +128,6 @@
 									</tbody>
 								</table>
 
-								<br><br>
-								<h4>Seleziona utenti</h4>
-								<table class="alt">
-									<thead>
-										<tr>
-											<th colspan="2">Utente con autorizzazione di avvio</th>
-											<th colspan="2">Utente che riceverà notifiche</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<div class="select-wrapper" id="seleziona_utente1">
-													<!-- <select id="configurazione_idutente">														
-														<option value="am-pisetta">am-pisetta</option>
-														<option value="am-bouveret">am-bouveret</option>
-														<option value="ut-luongo">ut-luongo</option>
-														<option value="am-obrelli">am-obrelli</option>
-														<option value="ut-pisoni">ut-pisoni</option>
-													</select> -->
-												</div>
-												
-											</td>
-											<td>
-												<a class="button special fit" onclick="aggiorna_autorizzazioneAvvio();">Aggiungi</a>
-											</td>	
-										
-											<td>
-												<div class="select-wrapper" id="seleziona_utente2">
-													<!-- <select id="configurazione_idutente1">
-														<option value="am-pisetta">am-pisetta</option>
-														<option value="am-bouveret">am-bouveret</option>
-														<option value="ut-luongo">ut-luongo</option>
-														<option value="am-obrelli">am-obrelli</option>
-														<option value="ut-pisoni">ut-pisoni</option>
-													</select> -->
-												</div>
-											</td>
-											<td>
-												<a class="button special fit" onclick="aggiorna_autorizzazioneNotifiche();">Aggiungi</a>
-											</td>	
-										</tr>
-									</tbody>
-								</table>
 							</div>
 							
 							<div class="6u$ 12u$(medium)">
@@ -191,6 +147,50 @@
 						</div>
 						
 						<div class="row 200%">
+							<h4>Seleziona utenti</h4>
+							<table class="alt">
+								<thead>
+									<tr>
+										<th colspan="2">Utente con autorizzazione di avvio</th>
+										<th colspan="2">Utente che riceverà notifiche</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div class="select-wrapper" id="seleziona_utente1">
+												<!-- <select id="configurazione_idutente">														
+													<option value="am-pisetta">am-pisetta</option>
+													<option value="am-bouveret">am-bouveret</option>
+													<option value="ut-luongo">ut-luongo</option>
+													<option value="am-obrelli">am-obrelli</option>
+													<option value="ut-pisoni">ut-pisoni</option>
+												</select> -->
+											</div>
+											
+										</td>
+										<td>
+											<a class="button special fit" onclick="aggiorna_autorizzazioneAvvio();">Aggiungi</a>
+										</td>	
+									
+										<td>
+											<div class="select-wrapper" id="seleziona_utente2">
+												<!-- <select id="configurazione_idutente1">
+													<option value="am-pisetta">am-pisetta</option>
+													<option value="am-bouveret">am-bouveret</option>
+													<option value="ut-luongo">ut-luongo</option>
+													<option value="am-obrelli">am-obrelli</option>
+													<option value="ut-pisoni">ut-pisoni</option>
+												</select> -->
+											</div>
+										</td>
+										<td>
+											<a class="button special fit" onclick="aggiorna_autorizzazioneNotifiche();">Aggiungi</a>
+										</td>	
+									</tr>
+								</tbody>
+							</table>
+
 							<div class="6u 12u$(medium)">
 								<h4>Elenco utenti autorizzati</h4>
 								<table class="alt">
