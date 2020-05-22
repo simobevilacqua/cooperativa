@@ -1,8 +1,56 @@
 <?php
 
+session_start();
 include "../assets/php/funzioni.php";
 
+if(!isset($_SESSION['log'])) {
+	session_unset();
+	session_destroy();
+
+	header("Location: ../index.php");
+}
+
+
+
+
+
+
+
 $connessione = connection();
+
+if(isset($_POST["salva"])){
+
+	$nome = $_POST["nome"];
+	$descrizioneLunga = $_POST["descrizioneLunga"];
+	$idprerequisito = $_POST["idprerequisito"];
+
+	$result = mysqli_query($connessione, "INSERT INTO programma (IDprogramma, nome, descrizioneLunga, IDprerequisito) VALUES (NULL, '$nome', '$descrizioneLunga', '$idprerequisito');");
+ 
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $output = "";
 
 $result = mysqli_query($connessione, "SELECT IDprogramma FROM programma ORDER BY IDprogramma");
@@ -11,7 +59,7 @@ if (mysqli_num_rows($result) > 0) {
 
 	while ($row = mysqli_fetch_array($result)) {
 
-		$output .= '<option value="' . $row["IDprogramma"] . '">' . $row["IDprogramma"] . '</option>';
+		$output .= '<option  value="' . $row["IDprogramma"] . '">' . $row["IDprogramma"] . '</option>';
 	}
 }
 
@@ -56,7 +104,7 @@ mysqli_close($connessione);
 	</header>
 
 	<!-- Main -->
-	<form>
+	<form method="POST" action="#">
 		<section id="main" class="wrapper">
 			<div class="inner">
 				<header class="align-center">
@@ -76,29 +124,30 @@ mysqli_close($connessione);
 						<tbody>
 							<tr>
 								<td>
-									<input type="text" name="nome" value="">
+									<input type="text" name="nome" required>
 								</td>
 								<td>
-									<input type="text" name="descrizioneLunga" value="">
+									<input type="text" name="descrizioneLunga">
 								</td>
 								<td>
 									<div class="select-wrapper" id="selezionePrerequisito">
-										<select id="configurazione_idprerequisito" onChange="aggiorna_prerequisito()">
+										<select name="idprerequisito">
 											<option selected>---</option>
 											<?php echo $output ?>
 										</select>
 									</div>
 								</td>
+								<!-- da vedere -->
 								<td>
-									<input type="text" id="configurazione_prerequisito" value="">
+									<input type="text" name="nome_prerequisito" required>
 								</td>
 								<td>
 									<div class="select-wrapper">
-										<select id="configurazione_tipoprogramma">
+										<select name="tipo">
 											<option selected>---</option>
-											<option value="Giornaliero">Giornaliero</option>
-											<option value="Settimanale">Settimanale</option>
-											<option value="Mensile">Mensile</option>
+											<option value="giornaliero">Giornaliero</option>
+											<option value="settimanale">Settimanale</option>
+											<option value="mensile">Mensile</option>
 										</select>
 									</div>
 								</td>
@@ -107,7 +156,6 @@ mysqli_close($connessione);
 					</table>
 					<div class="row 200%">
 						<div class="6u 12u$(medium)">
-
 							<br>
 							<h4>Seleziona calendario</h4>
 							<table class="alt">
@@ -130,9 +178,6 @@ mysqli_close($connessione);
 													<option value="Venerdì">Venerdì</option>
 													<option value="Sabato">Sabato</option>
 													<option value="Domenica">Domenica</option>
-													<option value="Tutti i giorni">Tutti i giorni</option>
-													<option value="Fine settimana">Fine settimana</option>
-													<option value="Fine mese">Fine mese</option>
 												</select>
 											</div>
 										</td>
@@ -142,7 +187,8 @@ mysqli_close($connessione);
 											</div>
 										</td>
 										<td>
-											<a class="button special fit" onclick="aggiorna_data();">Aggiungi</a>
+											<!-- <a class="button special fit" onclick="aggiorna_data();">Aggiungi</a> -->
+											<input type="submit" name="calendarizzazione" class="button special fit" value="Aggiungi">
 										</td>
 									</tr>
 								</tbody>
@@ -241,7 +287,7 @@ mysqli_close($connessione);
 							</table>
 						</div>
 					</div>
-					<input type="button" onclick="salvaProgramma()" class="button special fit" value="Salva programma"></input>
+					<input type="submit" class="button special fit" value="Salva programma" name="salva">
 				</div>
 			</div>
 		</section>
