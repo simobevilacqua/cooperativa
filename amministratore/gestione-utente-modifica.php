@@ -20,7 +20,7 @@
         $id = $_REQUEST["id"];
         $nome = $_REQUEST["nome"];
         $email = $_REQUEST["email"];
-        $psw = $_REQUEST["password"];
+        $psw = $_REQUEST["psw"];
         $category = $_REQUEST["category"];
 
 		//Faccio il Prepared Statement e poi al posto dei placeholder gli assegno il valore delle varibili
@@ -47,7 +47,7 @@
 		//Mi salvo i valori ottenuti nel form in delle variabili
         $nome = $_REQUEST["nome"];
         $email = $_REQUEST["email"];
-        $psw = $_REQUEST["password"];
+        $psw = $_REQUEST["psw"];
 		$category = $_REQUEST["category"];
 		
 		//Faccio il Prepared Statement e poi al posto dei placeholder gli assegno il valore delle varibili
@@ -122,7 +122,7 @@
 
 					<!-- Form -->
 					<h3>Gestisci l'account</h3>
-					<form method="POST" action="gestione-utente-modifica.php" class="login-form">
+					<form method="POST" action="gestione-utente-modifica.php" class="login-form" name="document" onsubmit="return controlla();">
 						<h4>ID utente:</h4>
 						<div class="6u 12u$(xsmall)">
 							<input type="text" name="id" value="<?php echo $row["IDutente"]?>" readonly/>
@@ -140,14 +140,14 @@
 						<br>
 						<h4>Password:</h4>
 						<div class="input-container" style="width:50%">
-							<input type="password" id="password" placeholder="Password" name="password" value="<?php echo $row["psw"]?>" required>
+							<input type="password" id="psw" placeholder="Password" name="psw" value="<?php echo $row["psw"]?>" required>
 							<i class="material-icons visibility">visibility_off</i>
 						</div>
 						<br>
 						<h4>Conferma Password:</h4>
-						<div class="input-container" style="width:50%">
-							<input type="password" id="confpassword" placeholder="Password" name="confpassword" required>
-							<i class="material-icons visibility">visibility_off</i>
+						<div class="input-container2" style="width:50%">
+							<input type="password" id="confpsw" placeholder="Conferma Password" name="confpsw" required>
+							<i class="material-icons visibility2">visibility_off</i>
 						</div>
 						<br>
 						<h4>Tipo utente:</h4>
@@ -188,7 +188,7 @@
 
 					<!-- Form -->
 					<h3>Gestisci l'account</h3>
-					<form method="POST" action="gestione-utente-modifica.php">
+					<form method="POST" action="gestione-utente-modifica.php" class="login-form" name="document" onsubmit="return controlla();">
 						<h4>Nome:</h4>
 						<div class="6u 12u$(xsmall)">
 							<input type="text" name="nome" required/>
@@ -200,8 +200,15 @@
 						</div>
 						<br>
 						<h4>Password:</h4>
-						<div class="6u 12u$(xsmall)">
-							<input type="text" name="password" required/>
+						<div class="input-container" style="width:50%">
+							<input type="password" id="psw" placeholder="Password" name="psw" required>
+							<i class="material-icons visibility">visibility_off</i>
+						</div>
+						<br>
+						<h4>Conferma Password:</h4>
+						<div class="input-container2" style="width:50%">
+							<input type="password" id="confpsw" placeholder="Conferma Password" name="confpsw" required>
+							<i class="material-icons visibility2">visibility_off</i>
 						</div>
 						<br>
 						<h4>Tipo utente:</h4>
@@ -246,6 +253,7 @@
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
 			<script src="../assets/js/modificautente.js"></script>
+			<script src="../assets/js/utente.js"></script>
 
 		<!-- Scripts -->
 		<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -265,7 +273,6 @@
 				  }
 				});
 			</script>
-			<script src="../assets/js/login.js" type="text/javascript"></script>
 			<script src="../assets/js/js.js" type="text/javascript"></script>
 			
 	</body>

@@ -33,6 +33,7 @@
 		<title>Gestione utente</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../assets/css/login.css" />
 		<link rel="stylesheet" href="../assets/css/main.css">
 	</head>
 	<body class="subpage">
@@ -93,7 +94,7 @@
 
 					?>
 						
-					<form action="#" method="POST">
+					<form action="#" method="POST" name="document" onsubmit="return controlla();">
 						<h4>ID utente:</h4>
 						<input type="text" name="IDutente" value="<?php echo $row['IDutente'];?>" readonly>
 						<br>
@@ -104,7 +105,19 @@
 						<input type="text" name="email" value="<?php echo $row['email'];?>" required>
 						<br>
 						<h4>Tipo utente:</h4>
-						<input type="text" name="tipo" value="<?php echo $row['tipo'];?>" readonly><br>
+						<input type="text" name="tipo" value="<?php echo $row['tipo'];?>" readonly>
+						<br>
+						<h4>Password:</h4>
+						<div class="input-container" style="width:95%">
+							<input type="password" id="psw" placeholder="Password" name="psw" value="<?php echo $row["psw"]?>" required>
+							<i class="material-icons visibility">visibility_off</i>
+						</div>
+						<br>
+						<h4>Conferma Password:</h4>
+						<div class="input-container2" style="width:95%">
+							<input type="password" id="confpsw" placeholder="Conferma Password" name="confpsw" required>
+							<i class="material-icons visibility2">visibility_off</i>
+						</div>  
 						<input type="submit" class="button special fit" name="aggiornaProfilo" value="AGGIORNA PROFILO">
 					</form>
 
@@ -134,5 +147,6 @@
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
 			<script src="../assets/js/modificautente.js"></script>
+			<script src="../assets/js/utente.js"></script>
 	</body>
 </html>
