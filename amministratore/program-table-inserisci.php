@@ -39,35 +39,31 @@
 						<table class="alt">
 							<thead>
 								<tr>
-									<th>ID programma</th>
+									<th>Nome</th>
 									<th>Descrizione</th>
-									<th>Durata</th>
 									<th>ID Programma prerequisito</th>
-									<th>Descrizione prerequisito</th>
+									<th>Nome prerequisito</th>
 									<th>Tipologia</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>
-										<input type="text" id="id_programma" value=" ">
+										<input type="text" name="nome" value="">
 									</td>
 									<td>
-										<input type="text" id="descrizioneprogramma" value=" ">
-									</td>
-									<td>
-										<input type="text" id="durata" value=" ">
+										<input type="text" name="descrizioneLunga" value="">
 									</td>
 									<td>
 										<div class="select-wrapper" id="selezionePrerequisito">
-											<!-- <select id="configurazione_idprerequisito" onChange="aggiorna_prerequisito()">
+											<select id="configurazione_idprerequisito" onChange="aggiorna_prerequisito()">
 												<option selected>---</option>
 												<option value="a001">a001</option>
 												<option value="a002">a002</option>
 												<option value="b003">b003</option>
 												<option value="b004">b004</option>
 												<option value="c005">c005</option>
-											</select> -->
+											</select>
 										</div>
 									</td>
 									<td>
@@ -159,13 +155,13 @@
 									<tr>
 										<td>
 											<div class="select-wrapper" id="seleziona_utente1">
-												<!-- <select id="configurazione_idutente">														
+												<select id="configurazione_idutente">														
 													<option value="am-pisetta">am-pisetta</option>
 													<option value="am-bouveret">am-bouveret</option>
 													<option value="ut-luongo">ut-luongo</option>
 													<option value="am-obrelli">am-obrelli</option>
 													<option value="ut-pisoni">ut-pisoni</option>
-												</select> -->
+												</select>
 											</div>
 											
 										</td>
@@ -175,13 +171,13 @@
 									
 										<td>
 											<div class="select-wrapper" id="seleziona_utente2">
-												<!-- <select id="configurazione_idutente1">
+												<select id="configurazione_idutente1">
 													<option value="am-pisetta">am-pisetta</option>
 													<option value="am-bouveret">am-bouveret</option>
 													<option value="ut-luongo">ut-luongo</option>
 													<option value="am-obrelli">am-obrelli</option>
 													<option value="ut-pisoni">ut-pisoni</option>
-												</select> -->
+												</select>
 											</div>
 										</td>
 										<td>
