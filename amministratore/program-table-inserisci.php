@@ -29,7 +29,7 @@
 		</header>
 
 		<!-- Main -->
-		<form><div></div>
+		<form>
 			<section id="main" class="wrapper">
 				<div class="inner">
 					<header class="align-center">
@@ -221,11 +221,7 @@
 						<input type="button" onclick="salvaProgramma()" class="button special fit" value="Salva programma"></input>
 					</div>
 				</div>
-			</section>
-			
-			<p id="nibba"></p>
-			
-			
+			</section>	
 		</form>
 		
 		<!-- Footer -->
