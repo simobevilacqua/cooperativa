@@ -10,6 +10,78 @@
 		header("Location: ../index.php");
 	}
 	
+	$connessione = connection();
+
+	//prende i dati del programma selezionato
+	$id = $_REQUEST['modifica'];
+	$query = "SELECT IDprogramma, nome, descrizioneLunga, IDprerequisito, (SELECT nome FROM programma AS pr2 WHERE pr1.IDprerequisito = pr2.IDprogramma) AS nomePrerequisito FROM programma AS pr1 WHERE IDprogramma = $id";
+	$res = mysqli_query($connessione, $query);
+	$datiProgramma = mysqli_fetch_array($res);
+
+	//stampa programmi
+	$output = "";
+	$result = mysqli_query($connessione, "SELECT IDprogramma FROM programma ORDER BY IDprogramma");
+	$ok = false;
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_array($result)) {
+			if($row['IDprogramma'] == $datiProgramma['IDprerequisito']) {
+				$output .= '<option  value="' . $row["IDprogramma"] . '" selected>' . $row["IDprogramma"] . '</option>';
+				$ok = true;
+			} else {
+				$output .= '<option  value="' . $row["IDprogramma"] . '">' . $row["IDprogramma"] . '</option>';
+			}
+		}
+		if(!$ok) {
+			$output .= '<option  value="" selected>---</option>';
+		} else {
+			$output .= '<option  value="">---</option>';
+		}
+	}
+
+	//stampa calendarizzazione
+	$result = mysqli_query($connessione, "SELECT giorno, ora FROM pianificazione WHERE IDprogramma = $id");
+	$cal = "";
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_array($result)) {
+			$cal .= '<tr><td>' . $row["giorno"] . '</td><td>' . $row["giorno"] . '</td><td><a href="#" class="button special fit" onclick="eliminaGiorno(0);">Elimina</a></td></tr>';
+		}
+	}
+
+	//stampa utenti avvio
+	$result = mysqli_query($connessione, "SELECT utente.IDutente AS IDutente, utente.nome AS nome FROM utente, autorizzato, programma WHERE utente.IDutente = autorizzato.IDutente AND programma.IDprogramma = autorizzato.IDprogramma");
+	$utentiAvvio = "";
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_array($result)) {
+			$utentiAvvio .= '<tr><td>' . $row["IDutente"] . '</td><td>' . $row["nome"] . '</td><td><a href="#" class="button special fit" onclick="eliminaGiorno(0);">Elimina</a></td></tr>';
+		}
+	}
+
+	//stampa utenti notifiche
+	$result = mysqli_query($connessione, "SELECT utente.IDutente AS IDutente, utente.nome AS nome FROM utente, riceveNotifiche, programma WHERE utente.IDutente = riceveNotifiche.IDutente AND programma.IDprogramma = riceveNotifiche.IDprogramma");
+	$utentiNotifiche = "";
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_array($result)) {
+			$utentiNotifiche .= '<tr><td>' . $row["IDutente"] . '</td><td>' . $row["nome"] . '</td><td><a href="#" class="button special fit" onclick="eliminaGiorno(0);">Elimina</a></td></tr>';
+		}
+	}
+
+	//stampa utenti
+	$utenti = "";
+	$result = mysqli_query($connessione, "SELECT IDutente, nome FROM utente");
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_array($result)) {
+			$utenti .= '<option  value="' . $row["IDutente"] . '">' . $row["nome"] . '</option>';
+		}
+	}
+
+
+	mysqli_close($connessione);
+
 ?>
 
 <!DOCTYPE HTML>
@@ -61,39 +133,30 @@
 								<th>Nome</th>
 								<th>Descrizione</th>
 								<th>ID prerequisito</th>
+								<th>Nome prerequisito</th>
 							</tr>
 						</thead>
-
-						<?php
-
-							$conn = connection();
-							$id = $_REQUEST['modifica'];
-							$query = "SELECT IDprogramma, nome, descrizioneLunga, IDprerequisito, (SELECT nome FROM programma AS pr2 WHERE pr1.IDprerequisito = pr2.IDprogramma) AS nomePrerequisito FROM programma AS pr1 WHERE IDprogramma = $id";
-							$res = mysqli_query($conn, $query);
-							$row = mysqli_fetch_array($res);
-							mysqli_close($conn);
-
-						?>
-
 						<tbody>
 							<tr>
 								<td>
-									<input type="text" name="IDprogramma" value="<?php echo $row['IDprogramma'] ?>" readonly>
+									<input type="text" name="IDprogramma" value="<?php echo $datiProgramma['IDprogramma'] ?>" readonly>
 								</td>
 								<td>
-									<input type="text" name="nome" value="<?php echo $row['nome'] ?>">
+									<input type="text" name="nome" value="<?php echo $datiProgramma['nome'] ?>">
 								</td>
 								<td>
-									<input type="text" name="descrizioneLunga" value="<?php echo $row['descrizioneLunga'] ?>">
+									<input type="text" name="descrizioneLunga" value="<?php echo $datiProgramma['descrizioneLunga'] ?>">
 								</td>
 								<td>
-									<input type="text" name="IDprerequisito" value="<?php echo $row['IDprerequisito'] ?>">
+									<select>
+										<?php echo $output; ?>
+									</select>
 								</td>
 								<td>
-									<input type="text" name="descrizionePrerequisito" value="<?php echo $row['nomePrerequisito'] ?>">
+									<input type="text" name="descrizionePrerequisito" value="<?php echo $datiProgramma['nomePrerequisito'] ?>">
 								</td>
-								<td>	
-
+								<!-- In teoria questo non serve
+								<td>
 									<div class="select-wrapper">
 										<select id="configurazione_tipoprogramma">
 											<option selected>---</option>
@@ -102,7 +165,7 @@
 											<option value="Mensile">Mensile</option>
 										</select>
 									</div>
-								</td>
+								</td>-->
 							</tr>
 						</tbody>
 					</table>
@@ -149,7 +212,7 @@
 								</tbody>
 							</table>
 
-							<br><br><br><br><br>
+							<br><br><br>
 							<h4>Seleziona utenti</h4>
 							<table class="alt">
 								<thead>
@@ -162,7 +225,10 @@
 									<tr>
 										<td>
 											<div class="select-wrapper" id="seleziona_utente1">
-												
+												<select id="configurazione_idutente">
+													<option selected>---</option>
+													<?php echo $utenti; ?>
+												</select>
 											</div>
 										</td>
 										<td>
@@ -171,7 +237,10 @@
 									
 										<td>
 											<div class="select-wrapper" id="seleziona_utente2">
-												
+												<select id="configurazione_idutente1">
+													<option selected>---</option>
+													<?php echo $utenti; ?>
+												</select>
 											</div>
 										</td>
 										<td>
@@ -193,8 +262,8 @@
 										<th></th>
 									</tr>
 								</thead>
-								<tbody  id="id_elenco_data">
-									
+								<tbody id="id_elenco_data">
+									<?php echo $cal;?>
 								</tbody>
 							</table>
 						</div>
@@ -212,7 +281,7 @@
 									</tr>
 								</thead>
 								<tbody id="elenco_utentiAvvio">
-									
+									<?php echo $utentiAvvio;?>
 								</tbody>
 							</table>
 						</div>
@@ -228,7 +297,7 @@
 									</tr>
 								</thead>
 								<tbody id="elenco_utentiNotifiche">
-									
+									<?php echo $utentiNotifiche;?>
 								</tbody>
 							</table>
 						</div>
@@ -253,11 +322,8 @@
 		<!-- Scripts -->
 			<script src="../assets/js/jquery.min.js"></script>
 			<script src="../assets/js/skel.min.js"></script>
-			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
 			<script src="../assets/js/program-table-modifica.js"></script>
 			<script src="../assets/js/table.js"></script>
-			<script>ImpostazioniInizialiModifica();</script>
-
 	</body>
 </html>

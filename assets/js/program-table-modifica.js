@@ -13,7 +13,7 @@ var programmiObj 	= JSON.parse(programmiJSON);
 
 //FUNZIONI
 
-function ImpostazioniInizialiModifica(){
+/*function ImpostazioniInizialiModifica(){
 
 	posizioneProgramma=localStorage.getItem("Indiceprogramma");
 	
@@ -114,7 +114,7 @@ function ImpostazioniInizialiModifica(){
 				"<td><a href='#' class='button special fit' onclick='eliminaUtentiNotifiche("+i+");'>Elimina</a></td></tr>";
 	}
 	document.getElementById("elenco_utentiNotifiche").innerHTML = text;
-}
+}*/
 
 function ricercaProgramma(programmi, id)
 {
