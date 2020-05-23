@@ -104,7 +104,7 @@ mysqli_close($connessione);
 	</header>
 
 	<!-- Main -->
-	<form method="POST" action="#">
+	<form method="POST" action="#" name="modulo" onsubmit="return prendi_giorni();">
 		<section id="main" class="wrapper">
 			<div class="inner">
 				<header class="align-center">
@@ -187,8 +187,8 @@ mysqli_close($connessione);
 											</div>
 										</td>
 										<td>
-											<!-- <a class="button special fit" onclick="aggiorna_data();">Aggiungi</a> -->
-											<input type="submit" name="calendarizzazione" class="button special fit" value="Aggiungi">
+											<a class="button special fit" onclick="aggiorna_data();">Aggiungi</a>
+											<!--<input type="submit" name="calendarizzazione" class="button special fit" value="Aggiungi">-->
 										</td>
 									</tr>
 								</tbody>
@@ -209,6 +209,7 @@ mysqli_close($connessione);
 								</thead>
 								<tbody id="id_elenco_data"></tbody>
 							</table>
+							<input type="text" name="calendario" style="display:none">
 						</div>
 					</div>
 

@@ -31,6 +31,19 @@ function aggiorna_data() {
     }
 }
 
+function prendi_giorni(){
+    var stringa = "";
+    for(i = 0; i < nPeriodicita; i++){
+        if(i == (nPeriodicita-1)){
+            stringa += programmiObj.programmi[posizioneProgramma].periodicita[i].giorno + "," + programmiObj.programmi[posizioneProgramma].periodicita[i].ora;
+        }else{
+            stringa += programmiObj.programmi[posizioneProgramma].periodicita[i].giorno + "," + programmiObj.programmi[posizioneProgramma].periodicita[i].ora + ",";
+        }   
+    }
+    var vett = new Array(stringa);
+    modulo.calendario.value = vett;
+}
+
 function ricercaGiornoOra(periodicita, giorno, ora) {
     var i = 0
     var trovato = false;
