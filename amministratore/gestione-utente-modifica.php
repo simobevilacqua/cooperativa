@@ -145,7 +145,7 @@
 						</div>
 						<br>
 						<h4>Conferma Password:</h4>
-						<div class="input-container2" style="width:50%">
+						<div class="input-container2" style="width:48%">
 							<input type="password" id="confpsw" placeholder="Conferma Password" name="confpsw" required>
 							<i class="material-icons visibility2">visibility_off</i>
 						</div>
@@ -206,7 +206,7 @@
 						</div>
 						<br>
 						<h4>Conferma Password:</h4>
-						<div class="input-container2" style="width:50%">
+						<div class="input-container2" style="width:48%">
 							<input type="password" id="confpsw" placeholder="Conferma Password" name="confpsw" required>
 							<i class="material-icons visibility2">visibility_off</i>
 						</div>
