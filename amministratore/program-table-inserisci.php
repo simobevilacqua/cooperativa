@@ -12,6 +12,21 @@ if(!isset($_SESSION['log'])) {
 
 $connessione = connection();
 
+$result = mysqli_query($connessione, "SELECT * FROM utente");
+
+$stringa_utenti = "";
+$i = 0;
+if (mysqli_num_rows($result) > 0) {
+	while ($row = mysqli_fetch_array($result)) {
+		if($i == (mysqli_num_rows($result)-1)){
+			$stringa_utenti .= $row["IDutente"] . "," . $row["nome"] . "," . $row["tipo"];
+		}else{
+			$stringa_utenti .= $row["IDutente"] . "," . $row["nome"] . "," . $row["tipo"] . ",";
+		}
+		$i++;
+	}
+}
+
 if(isset($_POST["salva"])){
 
 	$nome = $_POST["nome"];
@@ -103,8 +118,9 @@ mysqli_close($connessione);
 	</style>
 </head>
 
-<body class="subpage">
-
+<?php
+	echo "<body class='subpage' onload='utenti_disponibili(\"$stringa_utenti\")'>";
+?>
 	<!-- Header -->
 	<header id="header">
 		<div class="inner">
@@ -119,7 +135,7 @@ mysqli_close($connessione);
 			<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 		</div>
 	</header>
-
+	
 	<!-- Main -->
 	<form method="POST" action="#" name="modulo" onsubmit="return prendi_giorni();">
 		<section id="main" class="wrapper">

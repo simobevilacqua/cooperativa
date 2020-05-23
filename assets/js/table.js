@@ -1,3 +1,14 @@
+/*function utenti_disponibili(stringa){
+    var vett = stringa.split(",");
+    x = 0;
+    for(i = 0; i < vett.length; i+3){
+        utentiObj.utenti[x].id = vett[i];
+        utentiObj.utenti[x].nome = vett[i++];
+        utentiObj.utenti[x].tipo = vett[i+2];
+        x++;
+    }
+}*/
+
 function aggiorna_prerequisito() {
 
     var i = document.getElementById("configurazione_idprerequisito").selectedIndex - 1;
