@@ -188,11 +188,11 @@ mysqli_close($connessione);
 											<div class="select-wrapper">
 												<select id="configurazione_giorni">
 													<option selected>---</option>
-													<option value="Lunedì">Lunedì</option>
-													<option value="Martedì">Martedì</option>
-													<option value="Mercoledì">Mercoledì</option>
-													<option value="Giovedì">Giovedì</option>
-													<option value="Venerdì">Venerdì</option>
+													<option value="Lunedi">Lunedì</option>
+													<option value="Martedi">Martedì</option>
+													<option value="Mercoledi">Mercoledì</option>
+													<option value="Giovedi">Giovedì</option>
+													<option value="Venerdi">Venerdì</option>
 													<option value="Sabato">Sabato</option>
 													<option value="Domenica">Domenica</option>
 												</select>
