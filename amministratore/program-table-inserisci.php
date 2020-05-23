@@ -340,10 +340,5 @@ mysqli_close($connessione);
 	<script src="../assets/js/main.js"></script>
 	<script src="../assets/js/program-table-inserisci.js"></script>
 	<script src="../assets/js/table.js"></script>
-	<script>
-		ImpostazioniIniziali();
-	</script>
-
 </body>
-
 </html>

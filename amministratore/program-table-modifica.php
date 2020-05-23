@@ -44,8 +44,10 @@
 	$cal = "";
 
 	if (mysqli_num_rows($result) > 0) {
+		$i = 0;
 		while ($row = mysqli_fetch_array($result)) {
-			$cal .= '<tr><td>' . $row["giorno"] . '</td><td>' . $row["ora"] . '</td><td><a href="#" class="button special fit" onclick="eliminaGiorno(0);">Elimina</a></td></tr>';
+			$cal .= '<tr><td>' . $row["giorno"] . '</td><td>' . $row["ora"] . '</td><td><a href="#" class="button special fit" onclick="eliminaGiorno(' . $i . ');">Elimina</a></td></tr>';
+			$i++;
 		}
 	}
 
@@ -54,8 +56,10 @@
 	$utentiAvvio = "";
 
 	if (mysqli_num_rows($result) > 0) {
+		$i = 0;
 		while ($row = mysqli_fetch_array($result)) {
-			$utentiAvvio .= '<tr><td>' . $row["IDutente"] . '</td><td>' . $row["nome"] . '</td><td><a href="#" class="button special fit" onclick="eliminaGiorno(0);">Elimina</a></td></tr>';
+			$utentiAvvio .= '<tr><td>' . $row["IDutente"] . '</td><td>' . $row["nome"] . '</td><td><a href="#" class="button special fit" onclick="eliminaUtentiAvvio(' . $i . ');">Elimina</a></td></tr>';
+			$i++;
 		}
 	}
 
@@ -65,7 +69,8 @@
 
 	if (mysqli_num_rows($result) > 0) {
 		while ($row = mysqli_fetch_array($result)) {
-			$utentiNotifiche .= '<tr><td>' . $row["IDutente"] . '</td><td>' . $row["nome"] . '</td><td><a href="#" class="button special fit" onclick="eliminaGiorno(0);">Elimina</a></td></tr>';
+			$utentiNotifiche .= '<tr><td>' . $row["IDutente"] . '</td><td>' . $row["nome"] . '</td><td><a href="#" class="button special fit" onclick="eliminaUtentiNotifiche(' . $i . ');">Elimina</a></td></tr>';
+			$i++;
 		}
 	}
 
@@ -74,6 +79,7 @@
 	$result = mysqli_query($connessione, "SELECT IDutente, nome FROM utente");
 
 	if (mysqli_num_rows($result) > 0) {
+		$i = 0;
 		while ($row = mysqli_fetch_array($result)) {
 			$utenti .= '<option  value="' . $row["IDutente"] . '">' . $row["nome"] . '</option>';
 		}
@@ -306,7 +312,7 @@
 				</div>
 			</div>
 		</section>
-		
+
 		<!-- Footer -->
 		<footer id="footer">
 			<div class="inner">
@@ -320,10 +326,10 @@
 		</footer>
 
 		<!-- Scripts -->
-			<script src="../assets/js/jquery.min.js"></script>
-			<script src="../assets/js/skel.min.js"></script>
-			<script src="../assets/js/main.js"></script>
-			<script src="../assets/js/program-table-modifica.js"></script>
-			<script src="../assets/js/table.js"></script>
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/skel.min.js"></script>
+		<script src="../assets/js/main.js"></script>
+		<script src="../assets/js/program-table-modifica.js"></script>
+		<script src="../assets/js/table.js"></script>
 	</body>
 </html>
