@@ -127,7 +127,7 @@ function aggiorna_autorizzazioneAvvio() {
 function aggiorna_autorizzazioneNotifiche() {
     var scelta = document.getElementById("configurazione_idutente1").selectedIndex - 1;
     var id = objUtenti[scelta].id;
-    var tipo = objUtenti[scelta].permesso;
+    var tipo = objUtenti[scelta].tipo;
     var nome = objUtenti[scelta].nome;
 
     // cerco se l'utente selezionato è già stato inserito nell'elenco
