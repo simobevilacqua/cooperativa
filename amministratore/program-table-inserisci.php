@@ -10,12 +10,6 @@ if(!isset($_SESSION['log'])) {
 	header("Location: ../index.php");
 }
 
-
-
-
-
-
-
 $connessione = connection();
 
 if(isset($_POST["salva"])){
@@ -26,39 +20,24 @@ if(isset($_POST["salva"])){
 
 	$result = mysqli_query($connessione, "INSERT INTO programma (IDprogramma, nome, descrizioneLunga, IDprerequisito) VALUES (NULL, '$nome', '$descrizioneLunga', '$idprerequisito');");
  
-
-
-
 }
 
+//stampa utenti
+$utenti = "";
+$result = mysqli_query($connessione, "SELECT IDutente, nome FROM utente");
 
+if (mysqli_num_rows($result) > 0) {
+	while ($row = mysqli_fetch_array($result)) {
+		$utenti .= '<option  value="' . $row["IDutente"] . '">' . $row["nome"] . '</option>';
+	}
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//stampa programmi
 $output = "";
-
 $result = mysqli_query($connessione, "SELECT IDprogramma FROM programma ORDER BY IDprogramma");
 
 if (mysqli_num_rows($result) > 0) {
-
 	while ($row = mysqli_fetch_array($result)) {
-
 		$output .= '<option  value="' . $row["IDprogramma"] . '">' . $row["IDprogramma"] . '</option>';
 	}
 }
@@ -227,11 +206,8 @@ mysqli_close($connessione);
 									<td>
 										<div class="select-wrapper" id="seleziona_utente1">
 											<select id="configurazione_idutente">
-												<option value="am-pisetta">am-pisetta</option>
-												<option value="am-bouveret">am-bouveret</option>
-												<option value="ut-luongo">ut-luongo</option>
-												<option value="am-obrelli">am-obrelli</option>
-												<option value="ut-pisoni">ut-pisoni</option>
+												<option selected>---</option>
+												<?php echo $utenti; ?>
 											</select>
 										</div>
 
@@ -243,11 +219,8 @@ mysqli_close($connessione);
 									<td>
 										<div class="select-wrapper" id="seleziona_utente2">
 											<select id="configurazione_idutente1">
-												<option value="am-pisetta">am-pisetta</option>
-												<option value="am-bouveret">am-bouveret</option>
-												<option value="ut-luongo">ut-luongo</option>
-												<option value="am-obrelli">am-obrelli</option>
-												<option value="ut-pisoni">ut-pisoni</option>
+												<option selected>---</option>
+												<?php echo $utenti; ?>
 											</select>
 										</div>
 									</td>
@@ -310,7 +283,6 @@ mysqli_close($connessione);
 	<script src="../assets/js/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="../assets/js/skel.min.js"></script>
-	<script src="../assets/js/util.js"></script>
 	<script src="../assets/js/main.js"></script>
 	<script src="../assets/js/program-table-inserisci.js"></script>
 	<script src="../assets/js/table.js"></script>

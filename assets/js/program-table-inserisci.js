@@ -13,7 +13,7 @@ var programmiObj = JSON.parse(programmiJSON);
 
 //FUNZIONI
 
-function ImpostazioniIniziali() {
+/*function ImpostazioniIniziali() {
     // Verranno impostati i menu a tendina con i dati ricavati dal localStorage
 
     // Impostazioni opzioni per la scelta del programma prerequisito
@@ -44,4 +44,4 @@ function ImpostazioniIniziali() {
     var programma = { id: " ", descrizione: " ", prerequisito: " ", durataprevista: " ", tipo: " ", autorizzati: [], notifiche: [], periodicita: [] };
     programmiObj.programmi.push(programma);
     posizioneProgramma = programmiObj.programmi.length - 1;
-}
+}*/
