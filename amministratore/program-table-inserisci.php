@@ -18,8 +18,35 @@ if(isset($_POST["salva"])){
 	$descrizioneLunga = $_POST["descrizioneLunga"];
 	$idprerequisito = $_POST["idprerequisito"];
 
-	$result = mysqli_query($connessione, "INSERT INTO programma (IDprogramma, nome, descrizioneLunga, IDprerequisito) VALUES (NULL, '$nome', '$descrizioneLunga', '$idprerequisito');");
+	mysqli_query($connessione, "INSERT INTO programma (IDprogramma, nome, descrizioneLunga, IDprerequisito) VALUES (NULL, '$nome', '$descrizioneLunga', '$idprerequisito');");
  
+	$result = mysqli_query($connessione, "SELECT IDprogramma FROM programma WHERE nome = '$nome', descrizioneLunga = '$descrizioneLunga', IDprerequisito = '$idprerequisito'");
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_array($result)) {
+			$id = $row["IDprogramma"];
+		}
+	}
+
+	//Prendo i giorni per la calendarizzazione
+	$giorni = $_POST["calendario"];
+	$tipo = $_POST["tipo"];
+
+	//Variabili che mi servono per prendere il giorno, l'ora
+	$giorno = "";
+	$ora = "";
+	$i = 0;
+	$try = explode(",", $giorni);
+	foreach($try as $valore){
+		if($i % 2 != 0){
+			$giorno = $valore;
+		}else{
+			$ora = $valore;
+			mysqli_query($connessione, "INSERT INTO pianificazione (IDpianificazione, tipo, giorno, ora, IDprogramma) VALUES (NULL, '$tipo', '$giorno', '$ora', $id)");
+		}
+		$i++;
+	}
+
 }
 
 //stampa utenti
