@@ -18,10 +18,19 @@ if(isset($_POST["salva"])){
 	$descrizioneLunga = $_POST["descrizioneLunga"];
 	$idprerequisito = $_POST["idprerequisito"];
 
-	mysqli_query($connessione, "INSERT INTO programma (IDprogramma, nome, descrizioneLunga, IDprerequisito) VALUES (NULL, '$nome', '$descrizioneLunga', '$idprerequisito');");
- 
-	$result = mysqli_query($connessione, "SELECT IDprogramma FROM programma WHERE nome = '$nome', descrizioneLunga = '$descrizioneLunga', IDprerequisito = '$idprerequisito'");
+	if($idprerequisito == "---"){
+		mysqli_query($connessione, "INSERT INTO programma (IDprogramma, nome, descrizioneLunga, IDprerequisito) VALUES (NULL, '$nome', '$descrizioneLunga', NULL);");
 
+		$result = mysqli_query($connessione, "SELECT IDprogramma FROM programma WHERE nome = '$nome' AND descrizioneLunga = '$descrizioneLunga' AND IDprerequisito is NULL");
+	}else{
+		mysqli_query($connessione, "INSERT INTO programma (IDprogramma, nome, descrizioneLunga, IDprerequisito) VALUES (NULL, '$nome', '$descrizioneLunga', '$idprerequisito');");
+
+		$result = mysqli_query($connessione, "SELECT IDprogramma FROM programma WHERE nome = '$nome' AND descrizioneLunga = '$descrizioneLunga' AND IDprerequisito = '$idprerequisito'");
+	}
+
+	
+	//ID del programma appena caricato
+	$id = "";
 	if (mysqli_num_rows($result) > 0) {
 		while ($row = mysqli_fetch_array($result)) {
 			$id = $row["IDprogramma"];
@@ -38,11 +47,13 @@ if(isset($_POST["salva"])){
 	$i = 0;
 	$try = explode(",", $giorni);
 	foreach($try as $valore){
-		if($i % 2 != 0){
+		if($i % 2 == 0){
 			$giorno = $valore;
 		}else{
 			$ora = $valore;
-			mysqli_query($connessione, "INSERT INTO pianificazione (IDpianificazione, tipo, giorno, ora, IDprogramma) VALUES (NULL, '$tipo', '$giorno', '$ora', $id)");
+			if(mysqli_query($connessione, "INSERT INTO pianificazione (IDpianificazione, tipo, giorno, ora, IDprogramma) VALUES (NULL, '$tipo', '$giorno', '$ora', $id)")){
+			}else{
+			}
 		}
 		$i++;
 	}
@@ -145,7 +156,7 @@ mysqli_close($connessione);
 								</td>
 								<!-- da vedere -->
 								<td>
-									<input type="text" name="nome_prerequisito" required>
+									<input type="text" name="nome_prerequisito">
 								</td>
 								<td>
 									<div class="select-wrapper">
