@@ -45,7 +45,7 @@
 
 	if (mysqli_num_rows($result) > 0) {
 		while ($row = mysqli_fetch_array($result)) {
-			$cal .= '<tr><td>' . $row["giorno"] . '</td><td>' . $row["giorno"] . '</td><td><a href="#" class="button special fit" onclick="eliminaGiorno(0);">Elimina</a></td></tr>';
+			$cal .= '<tr><td>' . $row["giorno"] . '</td><td>' . $row["ora"] . '</td><td><a href="#" class="button special fit" onclick="eliminaGiorno(0);">Elimina</a></td></tr>';
 		}
 	}
 
