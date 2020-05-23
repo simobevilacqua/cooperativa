@@ -338,7 +338,7 @@ mysqli_close($connessione);
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="../assets/js/skel.min.js"></script>
 	<script src="../assets/js/main.js"></script>
-	<script src="../assets/js/program-table-inserisci.js"></script>
+	<!--<script src="../assets/js/program-table-inserisci.js"></script>-->
 	<script src="../assets/js/table.js"></script>
 </body>
 </html>
