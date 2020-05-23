@@ -50,6 +50,9 @@ CREATE TABLE IF NOT EXISTS `autorizzato` (
   KEY `IDprogramma` (`IDprogramma`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `autorizzato` (`IDutente`, `IDprogramma`) VALUES
+(1, 124);
+
 -- --------------------------------------------------------
 
 --
@@ -71,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `pianificazione` (
 --
 
 INSERT INTO `pianificazione` (`IDpianificazione`, `tipo`, `giorno`, `ora`, `IDprogramma`) VALUES
-(1, 'giornaliero', NULL, NULL, 123);
+(1, 'giornaliero', 'Martedi', '15:00:00', 124);
 
 -- --------------------------------------------------------
 
@@ -135,6 +138,9 @@ CREATE TABLE IF NOT EXISTS `ricevenotifiche` (
   PRIMARY KEY (`IDutente`,`IDprogramma`),
   KEY `IDprogramma` (`IDprogramma`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `ricevenotifiche` (`IDutente`, `IDprogramma`) VALUES
+(2, 124);
 
 -- --------------------------------------------------------
 
