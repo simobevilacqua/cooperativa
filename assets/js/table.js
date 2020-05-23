@@ -126,9 +126,9 @@ function aggiorna_autorizzazioneAvvio() {
 
 function aggiorna_autorizzazioneNotifiche() {
     var scelta = document.getElementById("configurazione_idutente1").selectedIndex - 1;
-    var id = utentiObj.utenti[scelta].id;
-    var tipo = utentiObj.utenti[scelta].permesso;
-    var nome = utentiObj.utenti[scelta].nome;
+    var id = objUtenti[scelta].id;
+    var tipo = objUtenti[scelta].permesso;
+    var nome = objUtenti[scelta].nome;
 
     // cerco se l'utente selezionato è già stato inserito nell'elenco
     var i = RicercaUtente(programmiObj.programmi[posizioneProgramma].notifiche, id);
