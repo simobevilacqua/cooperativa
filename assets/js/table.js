@@ -1,11 +1,22 @@
 //Variabili globali
 var nPeriodicita = 0;
 var posizioneProgramma = 0;
+var posizioneAutorizzato = 0;
+var posizioneNotificato = 0;
 
 // carico da localStorage l'elenco dei programmi
 var programmiJSON = localStorage.getItem("localProgrammiJSON");
 var programmiObj = JSON.parse(programmiJSON);
 
+//Metto a null tutti gli utenti autorizzati e quelli possono ricevere le notifiche
+for(i = 0; i < programmiObj.programmi[posizioneProgramma].autorizzati.length; i++){
+    programmiObj.programmi[posizioneProgramma].autorizzati[i] = {};
+}
+for(i = 0; i < programmiObj.programmi[posizioneProgramma].notifiche.length; i++){
+    programmiObj.programmi[posizioneProgramma].notifiche[i] = {};
+}
+
+//Variabili che mi servono per sapere quali sono gli utenti presenti nel database
 var json = "";
 var objUtenti = "";
 
@@ -26,7 +37,7 @@ function utenti_disponibili(stringa){
         i++;
     }
     json += "]";
-    alert(json);
+    //alert(json);
     objUtenti = JSON.parse(json);
 }
 
@@ -61,19 +72,6 @@ function aggiorna_data() {
             }
         }
     }
-}
-
-function prendi_giorni(){
-    var stringa = "";
-    for(i = 0; i < nPeriodicita; i++){
-        if(i == (nPeriodicita-1)){
-            stringa += programmiObj.programmi[posizioneProgramma].periodicita[i].giorno + "," + programmiObj.programmi[posizioneProgramma].periodicita[i].ora;
-        }else{
-            stringa += programmiObj.programmi[posizioneProgramma].periodicita[i].giorno + "," + programmiObj.programmi[posizioneProgramma].periodicita[i].ora + ",";
-        }   
-    }
-    var vett = new Array(stringa);
-    modulo.calendario.value = vett;
 }
 
 function ricercaGiornoOra(periodicita, giorno, ora) {
@@ -116,11 +114,12 @@ function aggiorna_autorizzazioneAvvio() {
     if (i != -1) {
         alert("Utente già inserito.");
     } else {
-        var i = programmiObj.programmi[posizioneProgramma].autorizzati.length;
+        var i = posizioneAutorizzato;
         text = "<tr><td>" + id + "</td><td>" + nome + "</td><td>" + tipo + "</td>" +
             "<td><a href='#' class='button special fit' onclick='eliminaUtentiAvvio(" + i + ");'>Elimina</a></td></tr>";
         document.getElementById("elenco_utentiAvvio").innerHTML += text;
-        programmiObj.programmi[posizioneProgramma].autorizzati.push(id);
+        programmiObj.programmi[posizioneProgramma].autorizzati[posizioneAutorizzato].id = id;
+        posizioneAutorizzato++;
     }
 }
 
@@ -135,11 +134,12 @@ function aggiorna_autorizzazioneNotifiche() {
     if (i != -1) {
         alert("Utente già inserito.");
     } else {
-        var i = programmiObj.programmi[posizioneProgramma].notifiche.length;
+        var i = posizioneNotificato;
         text = "<tr><td>" + id + "</td><td>" + nome + "</td><td>" + tipo + "</td>" +
             "<td><a href='#' class='button special fit' onclick='eliminaUtentiNotifiche(" + i + ");'>Elimina</a></td></tr>";
         document.getElementById("elenco_utentiNotifiche").innerHTML += text;
-        programmiObj.programmi[posizioneProgramma].notifiche.push(id);
+        programmiObj.programmi[posizioneProgramma].notifiche[posizioneNotificato].id = id;
+        posizioneNotificato++;
     }
 }
 
@@ -162,12 +162,14 @@ function eliminaUtentiAvvio(i) {
     var autorizzati = programmiObj.programmi[posizioneProgramma].autorizzati;
     var text = "";
     for (i = 0; i < autorizzati.length; i++) {
-        var id = autorizzati[i];
-        var j = RicercaUtente(utentiObj.utenti, id);
-        var nome = utentiObj.utenti[j].nome;
-        var tipo = utentiObj.utenti[j].tipo;
-        text += "<tr><td>" + id + "</td><td>" + nome + "</td><td>" + tipo + "</td>" +
-            "<td><a href='#' class='button special fit' onclick='eliminaUtentiAvvio(" + i + ");'>Elimina</a></td></tr>";
+        var id = autorizzati[i].id;
+        var j = RicercaUtente(objUtenti, id);
+        if(j != -1){
+            var nome = objUtenti[j].nome;
+            var tipo = objUtenti[j].tipo;
+            text += "<tr><td>" + id + "</td><td>" + nome + "</td><td>" + tipo + "</td>" +
+                "<td><a href='#' class='button special fit' onclick='eliminaUtentiAvvio(" + i + ");'>Elimina</a></td></tr>";
+        }
     }
     document.getElementById("elenco_utentiAvvio").innerHTML = text;
 }
@@ -177,16 +179,67 @@ function eliminaUtentiNotifiche(i) {
     var notifiche = programmiObj.programmi[posizioneProgramma].notifiche;
     var text = "";
     for (i = 0; i < notifiche.length; i++) {
-        var username = notifiche[i];
-        var j = RicercaUtente(utentiObj.utenti, username);
-        var nome = utentiObj.utenti[j].nome;
-        var tipo = utentiObj.utenti[j].pass;
-        text += "<tr><td>" + username + "</td><td>" + nome + "</td><td>" + tipo + "</td>" +
-            "<td><a href='#' class='button special fit' onclick='eliminaUtentiNotifiche(" + i + ");'>Elimina</a></td></tr>";
+        var id = notifiche[i].id;
+        var j = RicercaUtente(objUtenti, id);
+        if(j != -1){
+            var nome = objUtenti[j].nome;
+            var tipo = objUtenti[j].tipo;
+            text += "<tr><td>" + id + "</td><td>" + nome + "</td><td>" + tipo + "</td>" +
+                "<td><a href='#' class='button special fit' onclick='eliminaUtentiNotifiche(" + i + ");'>Elimina</a></td></tr>";
+        }
     }
     document.getElementById("elenco_utentiNotifiche").innerHTML = text;
 }
 
+function prendi_dati(){
+    prendi_giorni();
+    prendi_autorizzati();
+    prendi_notificati();
+}
+
+
+//Funzione per prendere i giorni della calendarizzazione
+function prendi_giorni(){
+    var stringa = "";
+    for(i = 0; i < nPeriodicita; i++){
+        if(i == (nPeriodicita-1)){
+            stringa += programmiObj.programmi[posizioneProgramma].periodicita[i].giorno + "," + programmiObj.programmi[posizioneProgramma].periodicita[i].ora;
+        }else{
+            stringa += programmiObj.programmi[posizioneProgramma].periodicita[i].giorno + "," + programmiObj.programmi[posizioneProgramma].periodicita[i].ora + ",";
+        }   
+    }
+    var vett = new Array(stringa);
+    modulo.calendario.value = vett;
+}
+
+//Funzione per predere gli utenti che sono autorizzati ad avviare un programma
+function prendi_autorizzati(){
+    var stringa = "";
+    for(i = 0; i < posizioneAutorizzato; i++){
+        if(i == (posizioneAutorizzato-1)){
+            stringa += programmiObj.programmi[posizioneProgramma].autorizzati[i].id;
+        }else{
+            stringa += programmiObj.programmi[posizioneProgramma].autorizzati[i].id + ",";
+        }   
+    }
+    var vett = new Array(stringa);
+    modulo.autorizzati.value = vett;
+}
+
+//Funzione per predere gli utenti che ricevono le notifiche del programma
+function prendi_notificati(){
+    var stringa = "";
+    for(i = 0; i < posizioneNotificato; i++){
+        if(i == (posizioneNotificato-1)){
+            stringa += programmiObj.programmi[posizioneProgramma].notifiche[i].id;
+        }else{
+            stringa += programmiObj.programmi[posizioneProgramma].notifiche[i].id + ",";
+        }   
+    }
+    var vett = new Array(stringa);
+    modulo.notificati.value = vett;
+}
+/*
 function salvaProgramma() {
     var conferma = confirm("Vuoi salvare le impostazioni?");
 
@@ -200,4 +253,4 @@ function salvaProgramma() {
         localStorage.setItem("localProgrammiJSON", programmiJSON);
         window.location.assign("program-table.html");
     }
-}
+}*/
