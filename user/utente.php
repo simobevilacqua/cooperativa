@@ -93,8 +93,8 @@
 						} else {
 
 					?>
-						
-					<form action="#" method="POST">
+
+					<form action="#" method="POST" name="document" onsubmit="return controlla();">
 						<h4>ID utente:</h4>
 						<input type="text" name="IDutente" value="<?php echo $row['IDutente'];?>" readonly>
 						<br>
