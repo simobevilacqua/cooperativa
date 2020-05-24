@@ -52,25 +52,41 @@ if(isset($_POST["salva"])){
 		}
 	}
 
-	//Prendo i giorni per la calendarizzazione
-	$giorni = $_POST["calendario"];
-	$tipo = $_POST["tipo"];
+	if($_POST["calendario"] != ""){
+		//Prendo i giorni per la calendarizzazione
+		$giorni = $_POST["calendario"];
+		$tipo = $_POST["tipo"];
 
-	//Variabili che mi servono per prendere il giorno, l'ora
-	$giorno = "";
-	$ora = "";
-	$i = 0;
-	$try = explode(",", $giorni);
-	foreach($try as $valore){
-		if($i % 2 == 0){
-			$giorno = $valore;
-		}else{
-			$ora = $valore;
-			if(mysqli_query($connessione, "INSERT INTO pianificazione (IDpianificazione, tipo, giorno, ora, IDprogramma) VALUES (NULL, '$tipo', '$giorno', '$ora', $id)")){
+		//Variabili che mi servono per prendere il giorno, l'ora
+		$giorno = "";
+		$ora = "";
+		$i = 0;
+		$try = explode(",", $giorni);
+		foreach($try as $valore){
+			if($i % 2 == 0){
+				$giorno = $valore;
 			}else{
+				$ora = $valore;
+				mysqli_query($connessione, "INSERT INTO pianificazione (IDpianificazione, tipo, giorno, ora, IDprogramma) VALUES (NULL, '$tipo', '$giorno', '$ora', $id)");
 			}
+			$i++;
 		}
-		$i++;
+	}
+
+	if($_POST["autorizzati"] != ""){
+		$autorizzati = $_POST["autorizzati"];
+		$try = explode(",", $autorizzati);
+		foreach($try as $valore){
+			mysqli_query($connessione, "INSERT INTO autorizzato (IDutente, IDprogramma) VALUES ($valore, $id)");
+		}
+	}
+
+	if($_POST["notificati"] != ""){
+		$notificati = $_POST["notificati"];
+		$try = explode(",", $notificati);
+		foreach($try as $valore){
+			mysqli_query($connessione, "INSERT INTO ricevenotifiche (IDutente, IDprogramma) VALUES ($valore, $id)");
+		}
 	}
 
 }
@@ -137,7 +153,7 @@ mysqli_close($connessione);
 	</header>
 	
 	<!-- Main -->
-	<form method="POST" action="#" name="modulo" onsubmit="return prendi_giorni();">
+	<form method="POST" action="#" name="modulo" onsubmit="return prendi_dati();">
 		<section id="main" class="wrapper">
 			<div class="inner">
 				<header class="align-center">
@@ -298,6 +314,7 @@ mysqli_close($connessione);
 								<tbody id="elenco_utentiAvvio">
 								</tbody>
 							</table>
+							<input type="text" name="autorizzati" style="display:none">
 						</div>
 
 						<div class="6u$ 12u$(medium)">
@@ -313,6 +330,7 @@ mysqli_close($connessione);
 								<tbody id="elenco_utentiNotifiche">
 								</tbody>
 							</table>
+							<input type="text" name="notificati" style="display:none">
 						</div>
 					</div>
 					<input type="submit" class="button special fit" value="Salva programma" name="salva">
