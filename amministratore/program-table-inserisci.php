@@ -73,6 +73,7 @@ if(isset($_POST["salva"])){
 		}
 	}
 
+	//Controllo se ci sono utenti autorizzati
 	if($_POST["autorizzati"] != ""){
 		$autorizzati = $_POST["autorizzati"];
 		$try = explode(",", $autorizzati);
@@ -81,6 +82,7 @@ if(isset($_POST["salva"])){
 		}
 	}
 
+	//Controllo se ci sono utenti notificati
 	if($_POST["notificati"] != ""){
 		$notificati = $_POST["notificati"];
 		$try = explode(",", $notificati);
