@@ -52,6 +52,7 @@ if(isset($_POST["salva"])){
 		}
 	}
 
+	//Controllo se ci sono dei giorni da assegnare al programma
 	if($_POST["calendario"] != ""){
 		//Prendo i giorni per la calendarizzazione
 		$giorni = $_POST["calendario"];
