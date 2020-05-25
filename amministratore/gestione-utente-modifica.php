@@ -258,8 +258,8 @@
 		<!-- Scripts -->
 		<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 			<script>
-				var input = document.getElementById("password");
-				var input2 = document.getElementById("confpassword");
+				var input = document.getElementById("psw");
+				var input2 = document.getElementById("confpsw");
 				input.addEventListener("keyup", function(event) {
 				  if (event.keyCode === 13) {
 				   event.preventDefault();

@@ -13,9 +13,9 @@
 	if(isset($_REQUEST['aggiornaProfilo'])) {
 		$conn = connection();
 
-		$query = $conn->prepare("UPDATE utente SET nome = ?, email = ? WHERE IDutente = ?");
-		$query->bind_param("ssi", $_REQUEST['nome'], $_REQUEST['email'], $_REQUEST['IDutente']);
-		$query->execute();
+		$stmt = $conn->prepare("UPDATE utente SET nome = ?, email = ? WHERE IDutente = ?");
+		$stmt->bind_param("ssi", $_REQUEST['nome'], $_REQUEST['email'], $_REQUEST['IDutente']);
+		$stmt->execute();
 
 		$stmt->close();
 	}
@@ -146,7 +146,7 @@
 			<script src="../assets/js/skel.min.js"></script>
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
-			<script src="../assets/js/modificautente.js"></script>
+			<!--<script src="../assets/js/modificautente.js"></script>-->
 			<script src="../assets/js/utente.js"></script>
 	</body>
 </html>

@@ -1,5 +1,5 @@
 function controlla(){
-    if(document.modifica.psw.value != document.modifica.confpsw.value){
+    if(document.psw.value != document.confpsw.value){
         alert("Hai inserito due password diverse!!");
         return false;
     }else{
