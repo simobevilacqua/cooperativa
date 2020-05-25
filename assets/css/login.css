@@ -118,6 +118,12 @@ body {
   align-items: center;
   
 }
+.input-container2 {
+  width: 100%;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+}
 .input-container input {
  font-family: "Roboto", sans-serif;
   outline: 0;

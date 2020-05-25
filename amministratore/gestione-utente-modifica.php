@@ -122,7 +122,7 @@
 
 					<!-- Form -->
 					<h3>Gestisci l'account</h3>
-					<form method="POST" action="gestione-utente-modifica.php" class="login-form" name="document" onsubmit="return controlla();">
+					<form method="POST" action="gestione-utente-modifica.php" class="login-form" name="modulo" onsubmit="return controlla();">
 						<h4>ID utente:</h4>
 						<div class="6u 12u$(xsmall)">
 							<input type="text" name="id" value="<?php echo $row["IDutente"]?>" readonly/>
@@ -139,15 +139,15 @@
 						</div>
 						<br>
 						<h4>Password:</h4>
-						<div class="input-container" style="width:50%">
+						<div class="input-container"  style="width:50%">
 							<input type="password" id="psw" placeholder="Password" name="psw" value="<?php echo $row["psw"]?>" required>
-							<i class="material-icons visibility">visibility_off</i>
+							<i class="material-icons visibility" style="margin-left: -30px; margin-bottom: 15px;">visibility_off</i>
 						</div>
 						<br>
 						<h4>Conferma Password:</h4>
-						<div class="input-container2" style="width:48%">
+						<div class="input-container2"  style="width:50%">
 							<input type="password" id="confpsw" placeholder="Conferma Password" name="confpsw" required>
-							<i class="material-icons visibility2">visibility_off</i>
+							<i class="material-icons visibility2" style="margin-left: -30px;">visibility_off</i>
 						</div>
 						<br>
 						<h4>Tipo utente:</h4>
@@ -188,7 +188,7 @@
 
 					<!-- Form -->
 					<h3>Gestisci l'account</h3>
-					<form method="POST" action="gestione-utente-modifica.php" class="login-form" name="document" onsubmit="return controlla();">
+					<form method="POST" action="gestione-utente-modifica.php" class="login-form" name="modulo" onsubmit="return controlla();">
 						<h4>Nome:</h4>
 						<div class="6u 12u$(xsmall)">
 							<input type="text" name="nome" required/>
@@ -202,13 +202,13 @@
 						<h4>Password:</h4>
 						<div class="input-container" style="width:50%">
 							<input type="password" id="psw" placeholder="Password" name="psw" required>
-							<i class="material-icons visibility">visibility_off</i>
+							<i class="material-icons visibility" style="margin-left: -30px; margin-bottom: 15px;">visibility_off</i>
 						</div>
 						<br>
 						<h4>Conferma Password:</h4>
-						<div class="input-container2" style="width:48%">
+						<div class="input-container2" style="width:50%">
 							<input type="password" id="confpsw" placeholder="Conferma Password" name="confpsw" required>
-							<i class="material-icons visibility2">visibility_off</i>
+							<i class="material-icons visibility2" style="margin-left: -30px;">visibility_off</i>
 						</div>
 						<br>
 						<h4>Tipo utente:</h4>
@@ -252,12 +252,12 @@
 			<script src="../assets/js/skel.min.js"></script>
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
-			<script src="../assets/js/modificautente.js"></script>
+			<!--<script src="../assets/js/modificautente.js"></script>-->
 			<script src="../assets/js/utente.js"></script>
 
 		<!-- Scripts -->
 		<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-			<script>
+			<!--<script>
 				var input = document.getElementById("psw");
 				var input2 = document.getElementById("confpsw");
 				input.addEventListener("keyup", function(event) {
@@ -272,7 +272,7 @@
 				   document.getElementById("blue-button").click();
 				  }
 				});
-			</script>
+			</script>-->
 			<script src="../assets/js/js.js" type="text/javascript"></script>
 			
 	</body>

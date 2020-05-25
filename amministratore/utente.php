@@ -94,7 +94,7 @@
 
 					?>
 						
-					<form action="#" method="POST" name="document" onsubmit="return controlla();">
+					<form action="#" method="POST" name="modulo" onsubmit="return controlla();">
 						<h4>ID utente:</h4>
 						<input type="text" name="IDutente" value="<?php echo $row['IDutente'];?>" readonly>
 						<br>
@@ -108,16 +108,16 @@
 						<input type="text" name="tipo" value="<?php echo $row['tipo'];?>" readonly>
 						<br>
 						<h4>Password:</h4>
-						<div class="input-container" style="width:95%">
+						<div class="input-container">
 							<input type="password" id="psw" placeholder="Password" name="psw" value="<?php echo $row["psw"]?>" required>
-							<i class="material-icons visibility">visibility_off</i>
+							<i class="material-icons visibility" style="margin-left: -30px; margin-bottom: 15px;">visibility_off</i>
 						</div>
 						<br>
 						<h4>Conferma Password:</h4>
-						<div class="input-container2" style="width:93%">
+						<div class="input-container2">
 							<input type="password" id="confpsw" placeholder="Conferma Password" name="confpsw" required>
-							<i class="material-icons visibility2">visibility_off</i>
-						</div>  
+							<i class="material-icons visibility2" style="margin-left: -30px;">visibility_off</i>
+						</div><br>
 						<input type="submit" class="button special fit" name="aggiornaProfilo" value="AGGIORNA PROFILO">
 					</form>
 
