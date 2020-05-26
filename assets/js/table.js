@@ -172,6 +172,7 @@ function eliminaUtentiAvvio(i) {
         }
     }
     document.getElementById("elenco_utentiAvvio").innerHTML = text;
+    posizioneAutorizzato--;
 }
 
 function eliminaUtentiNotifiche(i) {
@@ -189,6 +190,7 @@ function eliminaUtentiNotifiche(i) {
         }
     }
     document.getElementById("elenco_utentiNotifiche").innerHTML = text;
+    posizioneNotificato--;
 }
 
 function prendi_dati(){
